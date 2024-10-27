@@ -1,0 +1,138 @@
+.content {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+h1, p {
+    background: transparent; /* Removes black background */
+  }
+  
+
+.bgvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; /* Ensures the video covers the entire background */
+    z-index: -1;
+}
+
+.content h1 {
+    font-size: 70px;
+    margin-top: 80px;
+}
+
+.content p {
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+}
+.buttonx{
+    background: transparent;
+}
+button {
+    width: 200px;
+    padding: 15px 0;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent; /* Transparent background for the buttons */
+    color: white;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+button span {
+    background: #009688;
+    height: 100%;
+    width: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    transition: width 0.5s; /* Smooth transition for background fill */
+    border-radius: 25px;
+    
+}
+
+button:hover span {
+    width: 100%; /* Fills the button with color on hover */
+}
+
+button:hover {
+    color: #fff; /* Changes text color on hover */
+    border: none; /* Removes border on hover */
+}
+
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Adds a dark overlay on top of the video */
+    z-index: -1;
+}
+
+/* .box{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+    border: 1px solid #fff;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.box:before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: -1;
+}
+    */
+    .Information{
+        display: flex;
+        flex-direction: column;
+        gap:30px;
+        padding: 20px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        border-radius: 20px;
+       
+
+        
+  }
+
+.Information-row{
+        display: flex;
+        flex-direction:row;
+        flex-basis:100%;
+        gap:30px;
+  }
+.Information-card{
+        border: 1px solid #009688;
+        padding: 10px 15px;
+        border-radius: 5px;
+        backdrop-filter: blur(5px);
+        transition: background-color 0.3s ease;
+}
+.Information-card:hover {
+    background-color: rgba(0, 150, 136, 0.3); /* Change to a lighter teal on hover */
+  }
