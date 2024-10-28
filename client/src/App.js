@@ -4,7 +4,6 @@ import { Routes, Route,Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import SignupLogin from './pages/SignupLogin';
-import './global.css'; 
 
 function App() {
   return (
