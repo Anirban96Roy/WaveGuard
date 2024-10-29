@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, message } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom"; // Added useLocation to track the URL path
 import axios from "axios";
 import Spinner from "../components/Spinner";
 import '../customCSS/login.css';
@@ -10,11 +10,19 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(true);  // Controls whether we're on Login or Register form
   const [active, setActive] = useState(false);  // Controls the 'active' class on container
   const navigate = useNavigate();
+  const location = useLocation(); // Get the current URL
 
   // Toggle between Login and Register forms and set 'active' class
   const toggleForm = () => {
     setIsLogin(!isLogin);
     setActive(!active);  // Toggle the 'active' class
+
+    // Update the URL based on whether it's login or register
+    if (isLogin) {
+      navigate('/register');
+    } else {
+      navigate('/login');
+    }
   };
 
   const submitHandler = async (values) => {
@@ -44,6 +52,17 @@ const Login = () => {
     }
   }, [navigate]);
 
+  // Automatically switch form based on current URL
+  useEffect(() => {
+    if (location.pathname === "/register") {
+      setIsLogin(false);
+      setActive(true);
+    } else if (location.pathname === "/login") {
+      setIsLogin(true);
+      setActive(false);
+    }
+  }, [location.pathname]);
+
   return (
     <div className={`containerx ${active ? 'active' : ''}`}> {/* Add active class dynamically */}
       <div className="curved-shape"></div>
@@ -69,7 +88,7 @@ const Login = () => {
             <div className="reg-link animation" style={{ '--D': 4, '--S': 25 }}>
               <p>
                 Don't have an account? 
-                <a href="#" onClick={(e) => { e.preventDefault(); toggleForm(); }} className="SignUpLink"> SignUp</a>
+                <a href="/register" onClick={(e) => { e.preventDefault(); toggleForm(); }} className="SignUpLink"> SignUp</a>
               </p>
             </div>
           </form>
@@ -94,7 +113,7 @@ const Login = () => {
             <div className="reg-link animation" style={{ '--li': 21, '--S': 4 }}>
               <p>
                 Already have an account? 
-                <a href="#" onClick={(e) => { e.preventDefault(); toggleForm(); }} className="SignInLink"> Login</a>
+                <a href="/login" onClick={(e) => { e.preventDefault(); toggleForm(); }} className="SignInLink"> Login</a>
               </p>
             </div>
           </form>
