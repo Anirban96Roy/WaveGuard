@@ -7,6 +7,9 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isLogin, setIsLogin] = useState(true);  // Controls whether we're on Login or Register form
   const [active, setActive] = useState(false);  // Controls the 'active' class on container
+  const [username, setUsername] = useState(''); // Username for registration
+  const [email, setEmail] = useState('');       // Email for login or registration
+  const [password, setPassword] = useState(''); // Password for login or registration
   const navigate = useNavigate();
   const location = useLocation(); // Get the current URL
 
@@ -23,13 +26,22 @@ const Login = () => {
     }
   };
 
-  const submitHandler = async (values) => {
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    
+    // Create a values object based on form type
+    const values = {
+      name: !isLogin ? username : "", // Use username for registration
+      email: email,                   // Email for login or registration
+      password: password,             // Password for login or registration
+    };
+
     try {
       setLoading(true);
-      const endpoint = isLogin ? "/users/login" : "/users/register";
+      const endpoint = isLogin ? "users/login" : "users/register";
       const { data } = await axios.post(endpoint, values);
+
       setLoading(false);
-     // message.success(`${isLogin ? "Login" : "Registration"} successful`);
       
       if (isLogin) {
         localStorage.setItem("user", JSON.stringify({ ...data.user, password: "" }));
@@ -39,7 +51,7 @@ const Login = () => {
       }
     } catch (error) {
       setLoading(false);
-   //   message.error("Something went wrong");
+      // Handle error
     }
   };
 
@@ -69,14 +81,28 @@ const Login = () => {
       {isLogin ? (
         <div className="form Login">
           <h2 className="animation" style={{ '--D': 0, '--S': 21 }}>Login</h2>
-          <form onSubmit={(e) => { e.preventDefault(); submitHandler(); }}>
+          <form onSubmit={submitHandler}>
             <div className="input-box animation" style={{ '--D': 1, '--S': 22 }}>
-              <input type="text" id="Username" className="input" required />
-              <label htmlFor="Username" className="label">Username</label>
+              <input 
+                type="text" 
+                id="Email" 
+                className="input" 
+                required 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} // Capture input with onChange
+              />
+              <label htmlFor="Email" className="label">Email</label>
               <i className='bx bxs-user'></i>
             </div>
             <div className="input-box animation" style={{ '--D': 2, '--S': 23 }}>
-              <input type="password" id="Password" className="input" required />
+              <input 
+                type="password" 
+                id="Password" 
+                className="input" 
+                required 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} // Capture input with onChange
+              />
               <label htmlFor="Password" className="label">Password</label>
               <i className='bx bxs-lock-alt'></i>
             </div>
@@ -94,14 +120,40 @@ const Login = () => {
       ) : (
         <div className="form Register">
           <h2 className="animation" style={{ '--li': 17, '--S': 0 }}>Register</h2>
-          <form onSubmit={(e) => { e.preventDefault(); submitHandler(); }}>
+          <form onSubmit={submitHandler}>
             <div className="input-box animation" style={{ '--li': 18, '--S': 1 }}>
-              <input type="text" id="Username" className="input" required />
+              <input 
+                type="text" 
+                id="Username" 
+                className="input" 
+                required 
+                value={username} 
+                onChange={(e) => setUsername(e.target.value)} // Capture input with onChange
+              />
               <label htmlFor="Username" className="label">Username</label>
               <i className='bx bxs-user'></i>
             </div>
+            <div className="input-box animation" style={{ '--li': 18, '--S': 1 }}>
+              <input 
+                type="text" 
+                id="Email" 
+                className="input" 
+                required 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} // Capture input with onChange
+              />
+              <label htmlFor="Email" className="label">Email</label>
+              <i className='bx bxs-user'></i>
+            </div>
             <div className="input-box animation" style={{ '--li': 19, '--S': 2 }}>
-              <input type="password" id="Password" className="input" required />
+              <input 
+                type="password" 
+                id="Password" 
+                className="input" 
+                required 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} // Capture input with onChange
+              />
               <label htmlFor="Password" className="label">Password</label>
               <i className='bx bxs-lock-alt'></i>
             </div>

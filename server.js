@@ -18,7 +18,7 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(cors())
 
-app.use('/api/v1/users',require('../WaveGuard/routes/userRoute'))
+app.use('/api/v1/users',require('./routes/userRoute'))
 
 
 //port 

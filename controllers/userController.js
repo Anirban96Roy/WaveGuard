@@ -30,11 +30,14 @@ const registerController = async (req, res) => {
       newUser,
     });
   } catch (error) {
+    console.error(error);  // Log error for debugging
     res.status(400).json({
       success: false,
+      message: error.message || "Registration failed",
       error,
     });
   }
 };
+
 
 module.exports = { loginController, registerController };
