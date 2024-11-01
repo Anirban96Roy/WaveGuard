@@ -1,16 +1,15 @@
-import React from "react";
-import Footer from "./Footer";
-import Header from "./Header";
+// src/components/Layout/Layout.js
+import React from 'react';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 const Layout = ({ children }) => {
   return (
-    <>
+    <div className="layout">
       <Header />
-        <main style={{ minHeight: "80vh" }}>
-          {children}
-        </main>
-        <Footer />
-    </>
+      <main>{children}</main>
+      <Footer />
+    </div>
   );
 };
 

@@ -1,188 +1,164 @@
-.content {
-    width: 100%;
-    height: 100vh;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    z-index: 1;
-    padding-top: 50px;
-}
-
-h1, p {
-    background: transparent; /* Removes black background */
+/* For fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px); /* Slide up slightly from below */
   }
-  
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End with normal positioning */
+  }
+}
 
+.homepage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;    /* Center content vertically */
+  align-items: center;        /* Center content horizontally */
+  min-height: 100vh;          /* Make homepage take the full viewport height */
+  padding: 80px 20px 20px;    /* Add padding to account for the header */
+  text-align: center;
+}
+
+.homepage h1 {
+  color: white;
+  font-size: 70px;
+  margin-top: 80px;
+  animation: fadeIn 1s ease-in-out; /* Header fades in first */
+}
+
+.homepage p {
+  color: white;
+  margin: 20px auto;
+  font-weight: 300;
+  font-size: 25px;
+  animation: fadeIn 1.5s ease-in-out; /* Paragraph fades in next */
+}
+
+.video-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -2;
+}
+
+/* No animation for the background video */
 .bgvideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    object-fit: cover; /* Ensures the video covers the entire background */
-    z-index: -1;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  box-shadow: 0 0 30px rgb(230, 173, 173);
+  opacity: 0.7; /* Slightly transparent video */
 }
 
-.content h1 {
-    font-size: 70px;
-    margin-top: 80px;
+/* Animating the buttons with a slight delay */
+.buttonx {
+  gap: 20px;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0;
+  animation: fadeIn 2s ease-in-out; /* Buttons fade in after header and paragraph */
 }
 
-.content p {
-    margin: 20px auto;
-    font-weight: 100;
-    line-height: 25px;
-}
-.buttonx{
-    background: transparent;
-    gap: 20px;
-    display: flex;
-    flex-direction: row;
-}
 button {
-    width: 200px;
-    padding: 15px 0 15px 0;
-    margin: 20px 10px;
-    border-radius: 25px;
-    font-weight: bold;
-    border: 2px solid #009688;
-    background: transparent; /* Transparent background for the buttons */
-    color: white;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-    transition: color 0.3s; /* Smooth transition for hover effect */
+  padding: 15px 0 15px 0;
+  margin: 20px 10px;
+  width: 200px;
+  border-radius: 25px;
+  font-weight: bold;
+  border: 0.5px solid #02072fa2;
+  background: #02072fa2;
+  color: white;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s; /* Smooth transition for hover effect */
 }
 
 button span {
-    background: #009688;
-    height: 100%;
-    width: 0;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: width 0.5s; /* Smooth transition for background fill */
-    border-radius: 25px;
-   
-
+  background: #02072fa2;
+  height: 100%;
+  width: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  transition: width 0.5s;
+  border-radius: 25px;
 }
 
 button:hover span {
-    width: 100%; /* Fills the button with color on hover */
+  width: 100%; /* Fills the button with color on hover */
 }
 
 button:hover {
-    color: #fff; /* Changes text color on hover */
-    border: none; /* Removes border on hover */
+  color: #fff;
+  border: none;
 }
 
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Adds a dark overlay on top of the video */
-    z-index: -1;
+/* Animating the card holder with a delayed fade-in */
+.card-holder {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  border-radius: 20px;
+  animation: fadeIn 2.5s ease-in-out;
+   /* Cards appear after the buttons */
 }
 
-/* .box{
-    position: relative;
-    width: 100px;
-    height: 100px;
-    background: transparent;
-    border: 1px solid #fff;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+/* Card animation with delay to match the card-holder */
+.card {
+  background-color: #02072fa2;
+  border: 1px solid #02072fa2;
+  border-radius: 5px;
+  backdrop-filter: blur(5px);
+  transition: background-color 0.3s ease;
+  padding: 20px;
+  width: 30%; /* Default width for larger screens */
+  margin: 10px;
+  
+  animation: fadeIn 2.8s ease-in-out; /* Cards fade in after the card-holder */
 }
-.box:before{
-    content: '';
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    z-index: -1;
-}
-    */
-    .Information{
-        display: flex;
-        flex-direction: column;
-        gap:30px;
-        padding: 20px;
-        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-        cursor: pointer;
-        border-radius: 20px;
-       
 
-        
+.card:hover {
+  background-color: transparent;
+}
+
+@media (max-width: 992px) {
+
+  .homepage h1{
+    margin-top: 7em;
   }
 
-.Information-row{
-        display: flex;
-        flex-direction:row;
-        flex-basis:100%;
-        gap:30px;
+  .card-holder {
+    flex-direction: column;
+    align-items: center;
   }
-.Information-card{
-        border: 1px solid #009688;
-        padding: 10px 15px;
-        border-radius: 5px;
-        backdrop-filter: blur(5px);
-        transition: background-color 0.3s ease;
-}
-.Information-card:hover {
-    background-color: rgba(0, 150, 136, 0.3); /* Change to a lighter teal on hover */
+
+  .card {
+    width: 60%;
+    margin: 10px auto;
   }
-  @media (max-width: 768px) {
-    .content {
-        padding: 20px; /* Add padding on smaller screens */
-    }
-
-    .content h1 {
-        font-size: 40px; /* Smaller heading on mobile */
-    }
-
-    .content p {
-        font-size: 14px; /* Smaller paragraph text on mobile */
-        line-height: 20px; /* Adjust line height */
-    }
-
-    button {
-        width: 100%; /* Full-width buttons on mobile */
-        margin: 10px 0; /* Add vertical margin */
-    }
-
-    .Information {
-        flex-direction: column; /* Stack information cards */
-    }
-
-    .Information-row {
-        flex-direction: column; /* Stack information rows */
-    }
-
-    .Information-card {
-        margin-bottom: 10px; /* Add space between cards */
-    }
 }
 
-@media (max-width: 480px) {
-    .content h1 {
-        font-size: 30px; /* Even smaller heading on very small screens */
-    }
+@media (max-width: 768px) {
+  .card-holder {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .content p {
-        font-size: 12px; /* Smaller paragraph text */
-    }
-
-    button {
-        padding: 10px; /* Smaller padding on buttons */
-    }
+  .card {
+    width: 70%;
+    margin: 10px auto;
+  }
 }

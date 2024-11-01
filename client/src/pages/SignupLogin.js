@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, message } from "antd";
-import { Link, useNavigate, useLocation } from "react-router-dom"; // Added useLocation to track the URL path
+import { Link, useNavigate, useLocation } from "react-router-dom"; 
+import '../customCSS/login.css'; // Importing the CSS module
 import axios from "axios";
-import Spinner from "../components/Spinner";
-import '../customCSS/login.css';
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -31,7 +29,7 @@ const Login = () => {
       const endpoint = isLogin ? "/users/login" : "/users/register";
       const { data } = await axios.post(endpoint, values);
       setLoading(false);
-      message.success(`${isLogin ? "Login" : "Registration"} successful`);
+     // message.success(`${isLogin ? "Login" : "Registration"} successful`);
       
       if (isLogin) {
         localStorage.setItem("user", JSON.stringify({ ...data.user, password: "" }));
@@ -41,7 +39,7 @@ const Login = () => {
       }
     } catch (error) {
       setLoading(false);
-      message.error("Something went wrong");
+   //   message.error("Something went wrong");
     }
   };
 
@@ -64,7 +62,7 @@ const Login = () => {
   }, [location.pathname]);
 
   return (
-    <div className={`containerx ${active ? 'active' : ''}`}> {/* Add active class dynamically */}
+    <div className={`container ${active ? 'active' : ''}`}> {/* Add active class dynamically */}
       <div className="curved-shape"></div>
       <div className="curved-shape2"></div>
 

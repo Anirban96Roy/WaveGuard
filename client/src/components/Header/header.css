@@ -1,0 +1,121 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px); /* Slide up slightly from below */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0); /* End with normal positioning */
+    }
+  }
+  
+  .header {
+    position: fixed;
+    top: 0;
+    width: 80%; /* Width of the header */
+    max-width: 800px; /* Optional: set a maximum width */
+    right: 20px; /* Add a margin from the right edge */
+    background-color: #050229;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 30px;
+    margin-right: 20px;
+    z-index: 1000;
+    display: flex;
+    /* Separate website name and nav links */
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 20px;
+  }
+  
+  .search-box {
+    position: absolute; /* or fixed, based on your design */
+    top: 60px; /* Adjust based on your header height */
+    right: 20px; /* Adjust for spacing from the right */
+    background: white; /* Background color */
+    padding: 10px; /* Padding inside the search box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+    border-radius: 20px; /* Rounded corners */
+    z-index: 1000; /* Ensure it appears above other elements */
+    opacity: 0.85;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .search-box input {
+    border: 1px solid #ccc; /* Border style */
+    padding: 5px; /* Padding for input */
+    border-radius: 7px; /* Rounded corners for input */
+  }
+  
+  .search-box button {
+    margin-left: 2px; 
+    margin-right: 0.1px;/* Space between input and button */
+    padding: 5px; /* Padding for button */
+    border: none; /* Remove default border */
+    background-color: #050229; /* Button background color */
+    color: white; /* Button text color */
+    border-radius: 7px; /* Rounded corners for button */
+    cursor: pointer;
+    width: 70px /* Pointer cursor on hover */
+  }
+  
+  
+  .header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 20px;
+    margin-left: 390px;
+  }
+  
+  .nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Menu icon for mobile and tablet view */
+  .menu-icon {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 992px) {
+    .nav {
+      display: none; /* Hide the links on tablet/mobile by default */
+      flex-direction: column;
+      background-color: #333;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      width: 200px;
+      padding: 10px;
+      border-radius: 4px;
+    }
+  
+    .nav a {
+      padding: 10px 0;
+      display: block;
+      text-align: left;
+    }
+  
+    .menu-icon {
+      display: block; 
+      margin-left: auto; /* This will push the menu icon to the right */
+      margin-right: 1em; /* Ad* Show the menu icon */
+    }
+    
+    .nav.active {
+      display: flex; /* Show the dropdown menu when active */
+    }
+  }
+  

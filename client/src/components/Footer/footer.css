@@ -1,0 +1,31 @@
+.footer {
+  background-color: #050229;
+  color: white;
+  padding: 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Ensure "Contact us" on the left, "Share on" on the right */
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+}
+
+.social-icons h5 {
+  margin-right: 10px; /* Adds some space between "Share on:" and the icons */
+}
+
+.social-icons a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  text-decoration: underline;
+}
