@@ -1,0 +1,22 @@
+.donation-container {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.donation-info {
+    flex: 1;
+    padding: 20px;
+}
+
+.donation-form {
+    flex: 1;
+    padding: 20px;
+    border-left: 1px solid #ccc;
+}
+
+label, input {
+    display: block;
+    margin-bottom: 10px;
+}
