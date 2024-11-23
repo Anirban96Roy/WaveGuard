@@ -6,6 +6,7 @@ import About from "./pages/About";
 import SignupLogin from "./pages/SignupLogin";
 import Donation from './pages/Donation';
 import Success from './pages/success';
+import PostHerePage from './pages/PostHerePage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<SignupLogin/>} />
         <Route path="/donate" element={<Donation/>} />
         <Route path="/donate/success" element={<Success/>} />
+        <Route path="/post" element={<PostHerePage/>} />
         
 
       </Routes>
