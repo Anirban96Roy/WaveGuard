@@ -15,6 +15,11 @@ const donationSchema =new mongoose.Schema({
         type: Number,
         required: true, 
     },
+    tran_id: { 
+        type: String,
+        required: true,
+        unique: true, // Ensure `tran_id` is unique in the database
+      },
 }, { timestamps: true }); 
 
 const Donation=mongoose.model('Donation', donationSchema);

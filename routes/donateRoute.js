@@ -4,23 +4,29 @@ const Donation = require('../models/donationModel');
 
 const router = express.Router();
 
-router.post('/init', async(req, res) => {
-    const { name,mail,amount } = req.body; 
-    const donationData={name,mail,amount};
-    const donation= new Donation(donationData);
+router.post('/init', async (req, res) => {
+    const { name, mail, amount } = req.body;
+
+    // Generate a unique transaction ID
+    const tran_id = 'REF' + new Date().getTime();
+
+    // Add tran_id to the donation data
+    const donationData = { name, mail, amount, tran_id };
+    const donation = new Donation(donationData);
+
     try {
-        await donation.save(); 
+        await donation.save(); // Save donation including tran_id to the database
     } catch (error) {
         console.error('Error saving donation:', error);
         return res.status(500).json({ message: 'Failed to save donation' });
     }
 
-
+    // SSLCommerz payment data
     const data = {
-        total_amount: amount, // Use the dynamic amount here
+        total_amount: amount,
         currency: 'BDT',
-        tran_id: 'REF' + new Date().getTime(), // Unique transaction ID
-        success_url: 'http://localhost:8000/api/v1/donate/success',
+        tran_id: tran_id, // Use the generated tran_id
+        success_url: 'http://localhost:3000/donate/success/',
         fail_url: 'http://localhost:8000/api/v1/donate/fail',
         cancel_url: 'http://localhost:8000/api/v1/donate/cancel',
         ipn_url: 'http://localhost:8000/api/v1/donate/ipn',
@@ -60,42 +66,33 @@ router.post('/init', async(req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     });
 });
-// Success route
-router.post('/success', async (req, res) => {
-    const paymentData = req.body; 
 
-   
-    const donation = await Donation.findOne({ tran_id: paymentData.tran_id }); 
-    
+// Success route
+// Success route
+router.get('/success/:tran_id', async (req, res) => {
+    const { tran_id } = req.params; // Get tran_id from the URL params
+
+    // Find the donation entry by tran_id
+    const donation = await Donation.findOne({ tran_id });
+
     if (!donation) {
         return res.status(404).json({ message: 'Donation not found' });
     }
 
-    
-    donation.status = 'successful'; 
+    // Update donation status to successful
+    donation.status = 'successful';
     await donation.save();
 
-    
-    res.status(200).json({
-        message: 'Payment successful',
-        donation: {
-            name: donation.name,
-            email: donation.mail,
-            amount: donation.amount,
-            status: donation.status,
-        },
-    });
+    res.redirect('http://localhost:3000/donate/success/');
 });
 
 
 router.post('/fail', (req, res) => {
-   
     res.status(400).json({ message: 'Payment failed' });
 });
 
 // Cancel route
 router.post('/cancel', (req, res) => {
-    // Handle the cancellation case here
     res.status(200).json({ message: 'Payment canceled' });
 });
 
