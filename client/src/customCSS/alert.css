@@ -1,0 +1,8 @@
+.incident-chart canvas{
+  width: 80%; /* Adjust as needed */
+  height: 400px; /* Adjust as needed */
+  margin: 0 auto; /* Center the chart horizontally */
+  padding: 20px;
+  display: block; /* Ensure it is visible */
+  visibility: visible;
+}

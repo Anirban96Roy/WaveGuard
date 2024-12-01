@@ -1,0 +1,63 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+
+
+# Installed libraries
+*.egg-info/
+*.dist-info/
+*.whl
+*.egg
+pip-wheel-metadata/
+*.egg-info/
+
+# Large files and datasets
+*.h5
+*.hdf5
+*.model
+*.bin
+*.ckpt
+*.pth
+*.pt
+*.tar.gz
+
+# Logs and temp files
+*.log
+*.out
+*.tmp
+*.temp
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# OS and IDE-specific files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Configuration files
+*.ini
+*.yaml
+*.yml
+*.cfg
+
+# Generated Excel files
+locations_data.xlsx
+
+# Local development files
+*.local
+*.bak
+*.swp
+
+# Ignore everything in the sbnltk model directory
+sbnltk_model/
+/node_modules
+/myenv
