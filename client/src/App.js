@@ -7,6 +7,7 @@ import SignupLogin from "./pages/SignupLogin";
 import Donation from './pages/Donation';
 import Success from './pages/success';
 import PostHerePage from './pages/PostHerePage';
+import Alert from './pages/Alert';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
         <Route path="/donate" element={<Donation/>} />
         <Route path="/donate/success" element={<Success/>} />
         <Route path="/post" element={<PostHerePage/>} />
-        
+        <Route path="/data" element={<Alert/>} />
 
       </Routes>
     </>
