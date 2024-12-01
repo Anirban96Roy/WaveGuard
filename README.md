@@ -1,3 +1,5 @@
+# System-Project Lore
+
 ## git clone https://github.com/AritraLikhan/WaveGuard.git
 
 ## install python 3.10.0 into your pc and make sure it is globally accessible (add the binary file path to environment variable)
