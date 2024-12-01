@@ -4,7 +4,7 @@
 
 ## go to link : https://mega.nz/file/eBcl3DTD#4dLU3kayO81PINeEkDanAdOPzUAh5iHFcU0fAUi9q4w 
 
-## download the zip file, extract it and save it in the root directory of the project (WaveGuard)
+## download the myenv.zip file, extract it and save it in the root directory of the project (WaveGuard)
 
 ## open terminals and run the following:
 
@@ -14,4 +14,4 @@
 4. (in the WaveGuard) python app2.py
 5. (in the WaveGuard) npm run dev
 
-## make sure the mongodb compass is running
+## make sure the mongodb compass is running and database is connected
