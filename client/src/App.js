@@ -8,6 +8,7 @@ import Donation from './pages/Donation';
 import Success from './pages/success';
 import PostHerePage from './pages/PostHerePage';
 import Alert from './pages/Alert';
+import VolunteerDashboard from "./components/Dashboard/VolunteerDashboard";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Route path="/donate/success" element={<Success/>} />
         <Route path="/post" element={<PostHerePage/>} />
         <Route path="/data" element={<Alert/>} />
-
+        <Route path="/volunteerdashboard" element={<VolunteerDashboard />} />
       </Routes>
     </>
   );

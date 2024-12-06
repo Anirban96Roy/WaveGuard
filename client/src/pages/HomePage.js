@@ -9,9 +9,10 @@ const HomePage = () => {
   const navigate = useNavigate();  // Initialize the navigate hook
 
   // Function to handle Help Me! button click
-  const handleHelpClick = () => {
-    navigate('/register');  // Navigate to /register route
+  const handleHelpClick = (role) => {
+    navigate(`/register?role=${role}`); // Navigate with the role as a query parameter
   };
+  
 
   return (
     <Layout>
@@ -26,13 +27,16 @@ const HomePage = () => {
         <p> Welcome to our Flood Management & Monitoring System, designed to provide real-time data and resources to help communities prepare for and respond to flooding events.<br />
         Our platform utilizes advanced technology to track weather patterns, monitor water levels, and provide timely alerts.</p>
         <div className="buttonx">
-          <button type="button" onClick={handleHelpClick}>Help Me!
-              <span></span>
-          </button>
-          <button type="button" onClick={handleHelpClick}>I want to volunteer
-              <span></span>
-          </button>
-        </div>
+  <button type="button" onClick={() => handleHelpClick("victim")}>
+    Help Me!
+    <span></span>
+  </button>
+  <button type="button" onClick={() => handleHelpClick("volunteer")}>
+    I want to volunteer
+    <span></span>
+  </button>
+</div>
+
         <div className="card-holder">
           <div className="card">
             <p>Card 1 content</p>

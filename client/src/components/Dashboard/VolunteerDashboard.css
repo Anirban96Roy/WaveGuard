@@ -1,0 +1,44 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f9f9f9;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 20px;
+    color: #f0f0f0;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+    padding: 10px;
+    cursor: pointer;
+    color: #ddd;
+  }
+  
+  .sidebar ul li.active, .sidebar ul li:hover {
+    background-color: #444;
+    color: white;
+  }
+  
+  .dashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .profile-section h1 {
+    margin-bottom: 15px;
+  }
+  
