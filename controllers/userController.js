@@ -65,5 +65,36 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+const updateUserProfile = async (req, res) => {
+  try {
+    console.log("Request Body:", req.body);
+    console.log("Authenticated User ID:", req.user._id);
+    console.log("Requested User ID:", req.params.id);
 
-module.exports = { loginController, registerController, getUserProfile };
+    const userId = req.params.id;
+    const updates = req.body; // Contains the field(s) to update
+
+    // Find the user and update only the fields provided
+    const updatedUser = await userModel.findByIdAndUpdate(
+      userId,
+      { $set: updates },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User profile updated successfully",
+      user: updatedUser,
+    });
+  } catch (error) {
+    console.error("Error updating user:", error.message);
+    res.status(500).json({ success: false, message: "Server error", error: error.message });
+  }
+}
+
+
+module.exports = { loginController, registerController, getUserProfile, updateUserProfile };

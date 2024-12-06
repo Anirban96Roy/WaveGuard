@@ -113,8 +113,8 @@ app.listen(port, () => {
   console.log(`Server running on port:${port}`);
 
   // Start scraping after the server is ready
-  startScraping();
-  cron.schedule('*/3 * * * *', startScraping);
+  // startScraping();
+  // cron.schedule('*/3 * * * *', startScraping);
 });
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
