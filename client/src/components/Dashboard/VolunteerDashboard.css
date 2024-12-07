@@ -1,0 +1,81 @@
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    width: 1530px;
+    background-color: #f9f9f9;
+  }
+  
+  .sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 20px;
+    color: #f0f0f0;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar ul li {
+    margin: 15px 0;
+    padding: 10px;
+    cursor: pointer;
+    color: #ddd;
+  }
+  
+  .sidebar ul li.active, .sidebar ul li:hover {
+    background-color: #444;
+    color: white;
+  }
+  
+  .dashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+
+  .profile-section {
+    padding: 30px;
+    width: 100%;
+  }
+  
+  .profile-section h1 {
+    margin-bottom: 15px;
+  }
+  
+  .profile-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .profile-field p {
+    margin: 0;
+    margin-right: 10px;
+  }
+  
+  .profile-field input {
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .profile-field button {
+    padding: 5px 10px;
+    background-color: #050229;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .profile-field button:hover {
+    background-color: #050229;
+  }
+  

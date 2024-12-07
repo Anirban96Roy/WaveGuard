@@ -7,11 +7,10 @@ const donateRoute = require('./routes/donateRoute');
 const postRoute = require('./routes/postRoute');
 const alertRoute = require('./routes/alertRoute');
 const path = require('path');
-const parseDataFromXlsx = require('./parser');
-const processDataForGraph = require('./processor');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 const cron = require('node-cron');
+
 
 // configuring env
 dotdev.config();
@@ -32,6 +31,7 @@ app.use('/api/v1/donate', donateRoute);
 app.use('/uploads', express.static('uploads'));
 app.use('/api/v1/posts', postRoute); // Mount the postRoute under /api/v1/posts
 app.use('/api/v1',alertRoute);
+
 
 // port
 const port = 8001 || process.env.port;
@@ -113,8 +113,8 @@ app.listen(port, () => {
   console.log(`Server running on port:${port}`);
 
   // Start scraping after the server is ready
-  startScraping();
-  cron.schedule('*/5 * * * *', startScraping);
+  // startScraping();
+  // cron.schedule('*/3 * * * *', startScraping);
 });
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
