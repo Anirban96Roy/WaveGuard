@@ -12,7 +12,12 @@ const Sidebar = ({ selectedOption, setSelectedOption }) => {
         >
           Profile
         </li>
-        {/* Add more options here later */}
+        <li
+            className={selectedOption === "neartovictim" ? "active" : ""}
+            onClick={() => setSelectedOption("neartovictim")}
+        >
+          Near to Victim
+        </li>
       </ul>
     </div>
   );

@@ -6,6 +6,7 @@ const connectDb = require('./config/connectDb');
 const donateRoute = require('./routes/donateRoute');
 const postRoute = require('./routes/postRoute');
 const alertRoute = require('./routes/alertRoute');
+const volunteerRoute = require('./routes/volunteerRoute'); 
 const path = require('path');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
@@ -31,6 +32,7 @@ app.use('/api/v1/donate', donateRoute);
 app.use('/uploads', express.static('uploads'));
 app.use('/api/v1/posts', postRoute); // Mount the postRoute under /api/v1/posts
 app.use('/api/v1',alertRoute);
+app.use('/api/v1/volunteers', volunteerRoute);
 
 
 // port

@@ -10,4 +10,4 @@ router.post('/register',registerController);
 router.get('/:id', protect, getUserProfile);
 router.put("/:id", protect, updateUserProfile); 
 
-module.exports = router
+module.exports = router;

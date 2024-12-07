@@ -1,0 +1,88 @@
+/* Styling for the volunteers section */
+.volunteers-section {
+    padding: 20px;
+    background-color: #f4f7fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .volunteers-section h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 60px;
+  }
+  
+  /* Loader styles */
+  .volunteers-section p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .volunteers-section .loading-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-top: 10px;
+  }
+  
+  /* Volunteer cards container */
+  .volunteer-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .volunteer-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .volunteer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  .volunteer-card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .volunteer-card p {
+    font-size: 1rem;
+    color: #666;
+    margin: 5px 0;
+  }
+  
+  .volunteer-card p strong {
+    color: #333;
+  }
+  
+  .volunteer-card .location {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  /* When no volunteers are found */
+  .volunteer-cards p {
+    text-align: center;
+    color: #e74c3c;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  /* Responsive styling for smaller screens */
+  @media (max-width: 768px) {
+    .volunteer-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  
