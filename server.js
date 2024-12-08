@@ -3,7 +3,7 @@ const cors = require('cors'); // Cross-Origin Resource Sharing (CORS) : middlewa
 const morgan = require('morgan'); // providing detailed logs about requests
 const dotdev = require('dotenv'); // accessing port specified in .env file
 const connectDb = require('./config/connectDb');
-const donateRoute = require('./routes/donateRoute');
+
 const postRoute = require('./routes/postRoute');
 const alertRoute = require('./routes/alertRoute');
 const volunteerRoute = require('./routes/volunteerRoute'); 
@@ -28,7 +28,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api/v1/users', require('./routes/userRoute'));
-app.use('/api/v1/donate', donateRoute);
+
 app.use('/uploads', express.static('uploads'));
 app.use('/api/v1/posts', postRoute); // Mount the postRoute under /api/v1/posts
 app.use('/api/v1',alertRoute);
