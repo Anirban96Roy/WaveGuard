@@ -41,3 +41,13 @@
     color: #ecf0f1;
   }
   
+  .sidebar ul li.logout {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .sidebar ul li.logout:hover {
+    text-decoration: underline;
+  }
+  

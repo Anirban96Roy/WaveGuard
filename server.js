@@ -11,6 +11,9 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 const cron = require('node-cron');
+const bodyParser = require('body-parser');
+
+
 
 
 // configuring env
@@ -26,9 +29,11 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 app.use('/api/v1/users', require('./routes/userRoute'));
-
+app.use('/api/v1/users',require('./routes/donationRoute'));
+app.use('/api/v1/donations', require('./routes/donationRoute'));
 app.use('/uploads', express.static('uploads'));
 app.use('/api/v1/posts', postRoute); // Mount the postRoute under /api/v1/posts
 app.use('/api/v1',alertRoute);
@@ -115,8 +120,8 @@ app.listen(port, () => {
   console.log(`Server running on port:${port}`);
 
   // Start scraping after the server is ready
-  // startScraping();
-  // cron.schedule('*/3 * * * *', startScraping);
+//  startScraping();
+//  cron.schedule('*/3 * * * *', startScraping);
 });
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes, FaSearch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import './header.css';
 
 const Header = () => {
@@ -23,10 +24,10 @@ const Header = () => {
      
       
       <nav className={`nav ${isMenuOpen ? 'active' : ''}`}>
-        <a href="#">LINK</a>
-        <a href="#">LINK</a>
-        <a href="#">LINK</a>
-        <a href="#">LINK</a>
+        <Link to="/">Home</Link>
+        <Link to="/login">Login</Link>
+        <Link to="/data">Alert</Link>
+        <Link to="/donation">Donate</Link>
       </nav>
       
       {/* Menu icon for mobile/tablet view */}

@@ -1,8 +1,9 @@
 .incident-chart canvas{
-  width: 80%; /* Adjust as needed */
-  height: 400px; /* Adjust as needed */
-  margin: 0 auto; /* Center the chart horizontally */
-  padding: 20px;
+  margin-top: 440px;
+  width: 1510px; /* Adjust as needed */
+  height: 405px; /* Adjust as needed */
+  margin-bottom: 0px; /* Center the chart horizontally */
+  background-color: aliceblue;
   display: block; /* Ensure it is visible */
   visibility: visible;
 }

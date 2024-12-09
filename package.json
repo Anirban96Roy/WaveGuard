@@ -15,7 +15,9 @@
   "author": "mimic2001",
   "license": "MIT",
   "dependencies": {
+    "2captcha": "^3.0.5-2",
     "axios": "^1.7.7",
+    "body-parser": "^1.20.3",
     "colors": "^1.4.0",
     "concurrently": "^9.0.1",
     "cors": "^2.8.5",

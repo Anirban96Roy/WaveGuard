@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import '../customCSS/alert.css';
+import Layout from '../components/Layout/Layout';
 //import '../index.css'
 
 
@@ -81,7 +82,7 @@ const Alert = () => {
 
           return colorMapping[majority];
         }),
-        barThickness: 15, // Set the bar thickness explicitly (in pixels)
+        barThickness: 18, // Set the bar thickness explicitly (in pixels)
         maxBarThickness: 20, // Ensure the bar doesn't get too thick
       },
     ],
@@ -121,6 +122,7 @@ const Alert = () => {
   };
 
   return (
+    <Layout>
     <div className="incident-chart">
       {/* Show loading indicator or the chart */}
       {loading ? (
@@ -131,6 +133,7 @@ const Alert = () => {
         <Bar data={chartData} options={options} />
       )}
     </div>
+    </Layout>
   );
 };
 

@@ -1,0 +1,53 @@
+.donationpage {
+    min-height: 100vh;          /* Make homepage take the full viewport height */
+    padding-top: 730px;    /* Add padding to account for the header */
+    text-align: center;
+    background:#050229;
+}
+
+.donationpage h1 {
+    margin: 0;
+    padding: 0;
+    color: white; /* Slightly darker gray for the heading */
+  }
+
+/* Responsive p tag */
+.donationpage-content p {
+    font-size: 1.5rem; /* Default font size */
+    line-height: 1.5; /* Line height for better readability */
+    color: hsl(0, 0%, 97%); /* Slightly darker gray for text */
+    margin: 1rem; /* Remove default margin */
+    padding: 0;
+    width: 100%;
+    max-width: 1330px; /* Set a max width for larger screens */
+    margin-bottom: 1rem;
+    padding: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+
+@media (max-width: 768px) {
+    .donor-card-content h1 {
+      font-size: 2rem; /* Smaller font size for larger headings */
+    }
+}
+    /* Responsive adjustments */
+@media (max-width: 768px) {
+    .donationpage-content p {
+      font-size: 0.9rem; /* Smaller font size on mobile screens */
+      text-align: center; /* Center align the text on smaller screens */
+      padding: 0 1rem; /* Add some padding on mobile to prevent text from touching the edges */
+            }
+     
+}
+  
+    @media (max-width: 480px) {
+            .donationpage-content p {
+                    font-size: 0.85rem; /* Further reduce font size for very small screens */
+                    line-height: 1.4; /* Slightly tighter line height */
+                    padding: 0 0.5rem; /* Reduce padding for very small screens */
+              }
+     
+    }
+  

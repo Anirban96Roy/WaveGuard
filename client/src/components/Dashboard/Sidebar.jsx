@@ -1,5 +1,5 @@
 import React from "react";
-import "./Sidebar.css"; // Add CSS for styling
+import "./Sidebar.css";
 
 const Sidebar = ({ selectedOption, setSelectedOption }) => {
   return (
@@ -13,10 +13,14 @@ const Sidebar = ({ selectedOption, setSelectedOption }) => {
           Profile
         </li>
         <li
-            className={selectedOption === "neartovictim" ? "active" : ""}
-            onClick={() => setSelectedOption("neartovictim")}
+          className={selectedOption === "neartovictim" ? "active" : ""}
+          onClick={() => setSelectedOption("neartovictim")}
         >
           Near to Victim
+        </li>
+        <li  className={selectedOption === "logout" ? "active" : ""}
+          onClick={() => setSelectedOption("logout")}>
+          Logout
         </li>
       </ul>
     </div>

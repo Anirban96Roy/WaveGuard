@@ -4,8 +4,10 @@ import "./VolunteerDashboard.css";
 import axios from "axios";
 import Layout from "../Layout/Layout";
 import "../Dashboard/neartovictim.css";
+import { useNavigate } from "react-router-dom";
 
 const VolunteerDashboard = () => {
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const [selectedOption, setSelectedOption] = useState("profile");
   const [loading, setLoading] = useState(true);
@@ -21,6 +23,12 @@ const VolunteerDashboard = () => {
     location: false,
   });
 
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Clear user data
+    navigate("/login"); // Redirect to login page
+  };
+
+  
   const handleEditToggle = (field) => {
     setEditMode((prevState) => ({
       ...prevState,
@@ -104,8 +112,16 @@ const VolunteerDashboard = () => {
       fetchNearbyVolunteers();
     }
   }, [selectedOption, profile]);
-  return (
 
+  // useEffect(() => {
+  //   if (selectedOption === "logout") {
+  //     handleLogout();
+  //   }
+  // }, [selectedOption]);
+
+  
+  return (
+    <Layout>
       <div className="dashboard-container">
         <Sidebar
           selectedOption={selectedOption}
@@ -246,9 +262,10 @@ const VolunteerDashboard = () => {
                 </div>
               )}
             </div>
-          ) : null}
+          ) : selectedOption === "logout" ? ( handleLogout() ) : null}
         </div>
       </div>
+    </Layout>
   );
 };
 
