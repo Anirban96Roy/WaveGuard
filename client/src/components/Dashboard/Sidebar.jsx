@@ -13,10 +13,10 @@ const Sidebar = ({ selectedOption, setSelectedOption }) => {
           Profile
         </li>
         <li
-          className={selectedOption === "neartovictim" ? "active" : ""}
-          onClick={() => setSelectedOption("neartovictim")}
+          className={selectedOption === "nearbyvictim" ? "active" : ""}
+          onClick={() => setSelectedOption("nearbyvictim")}
         >
-          Near to Victim
+          Nearby Victims
         </li>
         <li  className={selectedOption === "logout" ? "active" : ""}
           onClick={() => setSelectedOption("logout")}>

@@ -1,4 +1,5 @@
 const userModel = require("../models/userModel");
+const locationModel = require("../models/locationModel");
 const jwt = require("jsonwebtoken");
 
 // Login Callback
@@ -65,6 +66,19 @@ const getUserProfile = async (req, res) => {
   }
 };
 
+const getLocations = async (req, res) => {
+  try {
+    const locations = await locationModel.find();
+    res.status(200).json(locations);
+  } catch (error) {
+    console.error("Error fetching locations:", error.message);
+    res.status(500).json({ message: "Failed to fetch locations" });
+  }
+};
+
+
+
+
 const updateUserProfile = async (req, res) => {
   try {
     console.log("Request Body:", req.body);
@@ -97,4 +111,4 @@ const updateUserProfile = async (req, res) => {
 }
 
 
-module.exports = { loginController, registerController, getUserProfile, updateUserProfile };
+module.exports = { loginController, registerController, getUserProfile, updateUserProfile, getLocations };

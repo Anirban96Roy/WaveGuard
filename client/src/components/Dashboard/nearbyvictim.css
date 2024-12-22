@@ -29,7 +29,7 @@
   }
   
   /* Volunteer cards container */
-  .volunteer-cards {
+  .victim-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
@@ -37,7 +37,7 @@
     margin: 0;
   }
   
-  .volunteer-card {
+  .victim-card {
     background-color: white;
     padding: 15px;
     border-radius: 8px;
@@ -45,43 +45,58 @@
     transition: all 0.3s ease-in-out;
   }
   
-  .volunteer-card:hover {
+  .victim-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   }
   
-  .volunteer-card h3 {
+  .victim-card h3 {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 10px;
   }
   
-  .volunteer-card p {
+  .victim-card p {
     font-size: 1rem;
     color: #666;
     margin: 5px 0;
   }
   
-  .volunteer-card p strong {
+  .victim-card p strong {
     color: #333;
   }
   
-  .volunteer-card .location {
+  .victim-card .location {
     font-weight: bold;
     color: #007bff;
   }
   
   /* When no volunteers are found */
-  .volunteer-cards p {
+  .victim-cards p {
     text-align: center;
     color: #e74c3c;
     font-size: 1.2rem;
     font-weight: bold;
   }
+
+  .directions-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .directions-box button {
+    margin-top: 10px;
+  }
   
   /* Responsive styling for smaller screens */
   @media (max-width: 768px) {
-    .volunteer-cards {
+    .victim-cards {
       grid-template-columns: 1fr;
     }
   }

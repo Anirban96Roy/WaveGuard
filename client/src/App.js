@@ -11,6 +11,8 @@ import PostHerePage from './pages/PostHerePage';
 import Alert from './pages/Alert';
 import VolunteerDashboard from "./components/Dashboard/VolunteerDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
         <Route path="/donate/:orgId" element={<DonationForm />} />
         <Route path="/post" element={<PostHerePage/>} />
         <Route path="/data" element={<Alert/>} />
+        
         <Route path="/volunteerdashboard" element={ <ProtectedRoute allowedRoles={["volunteer"]}>
               <VolunteerDashboard />
             </ProtectedRoute>} />
