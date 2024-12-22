@@ -7,6 +7,7 @@ const locationsRoute = require('./routes/locationRoute');
 const postRoute = require('./routes/postRoute');
 const alertRoute = require('./routes/alertRoute');
 const volunteerRoute = require('./routes/volunteerRoute'); 
+const victimRoute = require('./routes/victimRoute');
 const path = require('path');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
@@ -38,6 +39,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/v1/posts', postRoute); // Mount the postRoute under /api/v1/posts
 app.use('/api/v1',alertRoute);
 app.use('/api/v1/volunteers', volunteerRoute);
+app.use('/api/v1/victims',victimRoute);
 // app.use('/api/v1/locations', require('./routes/userRoute'));
 app.use("/api/v1", locationsRoute);
 

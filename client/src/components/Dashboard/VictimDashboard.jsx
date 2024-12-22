@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
-import VolSidebar from "./VolSidebar";
-import "./VolunteerDashboard.css";
+import VicSidebar from "./VicSidebar";
+import "./VictimDashboard.css";
 import axios from "axios";
 import Layout from "../Layout/Layout";
-import "../Dashboard/nearbyvictim.css";
+import "../Dashboard/nearbyvolunteer.css";
 import { useNavigate } from "react-router-dom";
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import { AiOutlineClose } from "react-icons/ai";
-const VolunteerDashboard = () => {
+const VictimDashboard = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
   const [selectedOption, setSelectedOption] = useState("profile");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [nearbyVictims, setnearbyVictims] = useState([]);
-  const [loadingVictims, setloadingVictims] = useState(false);
+  const [nearbyVolunteers, setnearbyVolunteers] = useState([]);
+  const [loadingVolunteers, setloadingVolunteers] = useState(false);
   const [gettingLocation, setGettingLocation] = useState(false);
   const [map, setMap] = useState(null);
   const [routingControl, setRoutingControl] = useState(null);
   const [showMap, setShowMap] = useState(false);
-  const [selectedVictim, setSelectedVictim] = useState(null);
+  const [selectedVolunteer, setSelectedVolunteer] = useState(null);
 
 
   const [editMode, setEditMode] = useState({
@@ -154,19 +154,19 @@ const VolunteerDashboard = () => {
     }
   };
 
-  const showDirections = async (victimLocation) => {
+  const showDirections = async (volunteerLocation) => {
     try {
-      setSelectedVictim(victimLocation);
+      setSelectedVolunteer(volunteerLocation);
       setShowMap(true);
 
       // Get coordinates for both locations
-      const volunteerCoords = await getCoordinates(profile.location);
-      const victimCoords = await getCoordinates(victimLocation);
+      const victimCoords = await getCoordinates(profile.location);
+      const volunteerCoords = await getCoordinates(volunteerLocation);
 
       // Initialize map if not already initialized
       let mapInstance = map;
       if (!mapInstance) {
-        mapInstance = L.map('map').setView([volunteerCoords.lat, volunteerCoords.lon], 13);
+        mapInstance = L.map('map').setView([victimCoords.lat, victimCoords.lon], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '© OpenStreetMap contributors'
         }).addTo(mapInstance);
@@ -181,8 +181,8 @@ const VolunteerDashboard = () => {
       // Add new routing control
       const newRoutingControl = L.Routing.control({
         waypoints: [
-          L.latLng(volunteerCoords.lat, volunteerCoords.lon),
-          L.latLng(victimCoords.lat, victimCoords.lon)
+          L.latLng(victimCoords.lat, victimCoords.lon),
+          L.latLng(volunteerCoords.lat, volunteerCoords.lon)
         ],
         routeWhileDragging: true,
         lineOptions: {
@@ -250,23 +250,23 @@ const VolunteerDashboard = () => {
   }, []);
 
   useEffect(() => {
-    const fetchnearbyVictims = async () => {
+    const fetchnearbyVolunteers = async () => {
       if (!profile.location) return;
-      setloadingVictims(true);
+      setloadingVolunteers(true);
       try {
-        const { data } = await axios.get(`/volunteers/nearby`, {
+        const { data } = await axios.get(`/victims/nearby`, {
           params: { location: profile.location },
         });
-        setnearbyVictims(data.victims);
+        setnearbyVolunteers(data.volunteers);
       } catch (err) {
         console.error("Error fetching nearby volunteers:", err);
       } finally {
-        setloadingVictims(false);
+        setloadingVolunteers(false);
       }
     };
 
-    if (selectedOption === "nearbyvictim" && profile.location) {
-      fetchnearbyVictims();
+    if (selectedOption === "nearbyvolunteer" && profile.location) {
+      fetchnearbyVolunteers();
     }
   }, [selectedOption, profile]);
 
@@ -274,12 +274,12 @@ const VolunteerDashboard = () => {
 
   return (
     <Layout>
-      <div className="voldashboard-container">
-        <VolSidebar
+      <div className="vicdashboard-container">
+        <VicSidebar
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
         />
-        <div className="voldashboard-content">
+        <div className="vicdashboard-content">
           {loading ? (
             <p>Loading...</p>
           ) : error ? (
@@ -388,17 +388,17 @@ const VolunteerDashboard = () => {
                 </div>
               </div>
             </div>
-          ) : selectedOption === "nearbyvictim" ? (
-            <div className="victims-section">
-              <h1>Nearby Victims</h1>
+          ) : selectedOption === "nearbyvolunteer" ? (
+            <div className="volunteers-section">
+              <h1>Nearby Volunteers</h1>
               {showMap && (
             <div className="floating-map-container">
-   <div id="map" style={{ height: '400px', width: '100%' }}></div>
+                  <div id="map" style={{ height: '400px', width: '100%' }}></div>
      <AiOutlineClose 
       className="close-map-icon" 
       onClick={() => {
         setShowMap(false);
-        setSelectedVictim(null);
+        setSelectedVolunteer(null);
         if (routingControl && map) {
           map.removeControl(routingControl);
           setRoutingControl(null);
@@ -407,26 +407,26 @@ const VolunteerDashboard = () => {
     />
                 </div>
               )}
-              {loadingVictims ? (
-                <p>Loading nearby victims...</p>
+              {loadingVolunteers ? (
+                <p>Loading nearby volunteers...</p>
               ) : (
-                <div className="victim-cards">
-                  {nearbyVictims.length > 0 ? (
-                    nearbyVictims.map((victim) => (
-                      <div key={victim._id} className="victim-card">
-                        <h3>{victim.name}</h3>
+                <div className="volunteer-cards">
+                  {nearbyVolunteers.length > 0 ? (
+                    nearbyVolunteers.map((volunteer) => (
+                      <div key={volunteer._id} className="volunteer-card">
+                        <h3>{volunteer.name}</h3>
                         <p>
-                          <strong>Email:</strong> {victim.email}
+                          <strong>Email:</strong> {volunteer.email}
                         </p>
                         <p>
-                          <strong>Contact:</strong> {victim.contact}
+                          <strong>Contact:</strong> {volunteer.contact}
                         </p>
                         <p>
-                          <strong>Location:</strong> {victim.location}
+                          <strong>Location:</strong> {volunteer.location}
                         </p>
                         <button 
                           className="direction-btn"
-                          onClick={() => showDirections(victim.location)}
+                          onClick={() => showDirections(volunteer.location)}
                           disabled={!profile.location}
                         >
                           {!profile.location ? "Set your location first" : "See Directions"}
@@ -434,7 +434,7 @@ const VolunteerDashboard = () => {
                       </div>
                     ))
                   ) : (
-                    <p>No victims found nearby.</p>
+                    <p>No volunteers found nearby.</p>
                   )}
                 </div>
               )}
@@ -448,4 +448,4 @@ const VolunteerDashboard = () => {
   );
 };
 
-export default VolunteerDashboard;
+export default VictimDashboard;

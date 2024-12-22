@@ -1,40 +1,40 @@
-.voldashboard-container {
+.vicdashboard-container {
     display: flex;
     height: 100vh;
     width: 1530px;
     background-color: #f9f9f9;
   }
   
-  .volsidebar {
+  .vicsidebar {
     width: 250px;
     background-color: #333;
     color: white;
     padding: 20px;
   }
   
-  .volsidebar h2 {
+  .vicsidebar h2 {
     margin-bottom: 20px;
     color: #f0f0f0;
   }
   
-  .volsidebar ul {
+  .vicsidebar ul {
     list-style: none;
     padding: 0;
   }
   
-  .volsidebar ul li {
+  .vicsidebar ul li {
     margin: 15px 0;
     padding: 10px;
     cursor: pointer;
     color: #ddd;
   }
   
-  .volsidebar ul li.active, .volsidebar ul li:hover {
+  .vicsidebar ul li.active, .vicsidebar ul li:hover {
     background-color: #444;
     color: white;
   }
   
-  .voldashboard-content {
+  .vicdashboard-content {
     flex-grow: 1;
     padding: 20px;
   }

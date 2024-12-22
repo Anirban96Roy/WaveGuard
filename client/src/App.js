@@ -10,6 +10,7 @@ import Success from './pages/success';
 import PostHerePage from './pages/PostHerePage';
 import Alert from './pages/Alert';
 import VolunteerDashboard from "./components/Dashboard/VolunteerDashboard";
+import VictimDashboard from "./components/Dashboard/VictimDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
@@ -30,6 +31,15 @@ function App() {
         <Route path="/volunteerdashboard" element={ <ProtectedRoute allowedRoles={["volunteer"]}>
               <VolunteerDashboard />
             </ProtectedRoute>} />
+
+ <Route 
+  path="/victimdashboard" 
+  element={ 
+    <ProtectedRoute allowedRoles={["victim"]}>
+      <VictimDashboard />
+    </ProtectedRoute> 
+  } 
+/>
       </Routes>
     </>
   );

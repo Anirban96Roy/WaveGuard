@@ -1,9 +1,9 @@
 import React from "react";
-import "./Sidebar.css";
+import "./VolSidebar.css";
 
-const Sidebar = ({ selectedOption, setSelectedOption }) => {
+const VolSidebar = ({ selectedOption, setSelectedOption }) => {
   return (
-    <div className="sidebar">
+    <div className="volsidebar">
       <h2>Volunteer Dashboard</h2>
       <ul>
         <li
@@ -27,4 +27,4 @@ const Sidebar = ({ selectedOption, setSelectedOption }) => {
   );
 };
 
-export default Sidebar;
+export default VolSidebar;

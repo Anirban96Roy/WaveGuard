@@ -1,5 +1,5 @@
 /* Styling for the volunteers section */
-.victims-section {
+.volunteers-section {
     padding: 20px;
     background-color: #f4f7fa;
     border-radius: 8px;
@@ -7,7 +7,7 @@
     margin-top: 20px;
   }
   
-  .victims-section h1 {
+  .volunteers-section h1 {
     text-align: center;
     font-size: 2rem;
     color: #333;
@@ -15,13 +15,13 @@
   }
   
   /* Loader styles */
-  .victims-section p {
+  .volunteers-section p {
     text-align: center;
     font-size: 1.2rem;
     color: #555;
   }
   
-  .victims-section .loading-text {
+  .volunteers-section .loading-text {
     font-size: 1.5rem;
     font-weight: bold;
     color: #007bff;
@@ -29,7 +29,7 @@
   }
   
   /* Volunteer cards container */
-  .victim-cards {
+  .volunteer-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
@@ -37,7 +37,7 @@
     margin: 0;
   }
   
-  .victim-card {
+  .volunteer-card {
     background-color: white;
     padding: 15px;
     border-radius: 8px;
@@ -45,34 +45,34 @@
     transition: all 0.3s ease-in-out;
   }
   
-  .victim-card:hover {
+  .volunteer-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   }
   
-  .victim-card h3 {
+  .volunteer-card h3 {
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 10px;
   }
   
-  .victim-card p {
+  .volunteer-card p {
     font-size: 1rem;
     color: #666;
     margin: 5px 0;
   }
   
-  .victim-card p strong {
+  .volunteer-card p strong {
     color: #333;
   }
   
-  .victim-card .location {
+  .volunteer-card .location {
     font-weight: bold;
     color: #007bff;
   }
   
   /* When no volunteers are found */
-  .victim-cards p {
+  .volunteer-cards p {
     text-align: center;
     color: #e74c3c;
     font-size: 1.2rem;
@@ -96,7 +96,7 @@
   
   /* Responsive styling for smaller screens */
   @media (max-width: 768px) {
-    .victim-cards {
+    volunteer-cards {
       grid-template-columns: 1fr;
     }
   }
