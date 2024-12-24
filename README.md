@@ -17,4 +17,29 @@
 5. (in the WaveGuard) python app2.py
 6. (in the WaveGuard) npm run dev
 
-## make sure the mongodb compass is running and database is connected
+## make sure the mongodb compass is running and database is connected      
+
+## In case port doesn't allow to run the project     
+Run the following commands in terminal:    
+```
+netstat -ano | findstr :<port-number>
+```
+Find the PID being listened and kill it by running:
+```
+taskkill /PID <PID> /F
+```
+For example, for port 8001, run :
+```
+netstat -ano | findstr :8001
+```
+Check for output like this:
+  TCP    0.0.0.0:8001           0.0.0.0:0              LISTENING       3364
+
+Now to kill the process (PID) "3364" occupying port 8001, run:
+```
+taskkill /PID 3364 /F
+```
+!!!CAUTION     
+If you think the port might be executing some vital process that should not be preempted, try using a different port for frontend or backend
+
+  
