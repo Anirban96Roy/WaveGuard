@@ -8,6 +8,7 @@ const postRoute = require('./routes/postRoute');
 const alertRoute = require('./routes/alertRoute');
 const volunteerRoute = require('./routes/volunteerRoute'); 
 const victimRoute = require('./routes/victimRoute');
+const notificationRoute = require('./routes/notificationRoute');
 const path = require('path');
 const puppeteer = require('puppeteer');
 const axios = require('axios');
@@ -42,6 +43,7 @@ app.use('/api/v1/volunteers', volunteerRoute);
 app.use('/api/v1/victims',victimRoute);
 // app.use('/api/v1/locations', require('./routes/userRoute'));
 app.use("/api/v1", locationsRoute);
+app.use('/api/v1/notifications', notificationRoute);
 
 
 // port

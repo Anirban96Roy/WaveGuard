@@ -10,6 +10,7 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import { AiOutlineClose } from "react-icons/ai";
+import NotificationList from "./NotificationList"
 const VictimDashboard = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
@@ -439,7 +440,10 @@ const VictimDashboard = () => {
                 </div>
               )}
             </div>
-          ) : selectedOption === "logout" ? (
+          ): selectedOption === "notifications" ? ( // Add this new condition
+            <NotificationList />
+          )
+           : selectedOption === "logout" ? (
             handleLogout()
           ) : null}
         </div>

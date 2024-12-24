@@ -10,6 +10,8 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import { AiOutlineClose } from "react-icons/ai";
+import NotificationList from "./NotificationList"
+
 const VolunteerDashboard = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
@@ -414,24 +416,49 @@ const VolunteerDashboard = () => {
                   {nearbyVictims.length > 0 ? (
                     nearbyVictims.map((victim) => (
                       <div key={victim._id} className="victim-card">
-                        <h3>{victim.name}</h3>
-                        <p>
-                          <strong>Email:</strong> {victim.email}
-                        </p>
-                        <p>
-                          <strong>Contact:</strong> {victim.contact}
-                        </p>
-                        <p>
-                          <strong>Location:</strong> {victim.location}
-                        </p>
-                        <button 
-                          className="direction-btn"
-                          onClick={() => showDirections(victim.location)}
-                          disabled={!profile.location}
-                        >
-                          {!profile.location ? "Set your location first" : "See Directions"}
-                        </button>
-                      </div>
+  <h3>{victim.name}</h3>
+  <p>
+    <strong>Email:</strong> {victim.email}
+  </p>
+  <p>
+    <strong>Contact:</strong> {victim.contact}
+  </p>
+  <p>
+    <strong>Location:</strong> {victim.location}
+  </p>
+  <button 
+    className="direction-btn"
+    onClick={() => showDirections(victim.location)}
+    disabled={!profile.location}
+  >
+    {!profile.location ? "Set your location first" : "See Directions"}
+  </button>
+  <button 
+    className="rescue-btn"
+    onClick={async () => {
+      try {
+        const user = JSON.parse(localStorage.getItem('user'));
+        await axios.post(
+          '/notifications/rescue-request',
+          { victimId: victim._id },
+          { headers: { Authorization: `Bearer ${user.token}` } }
+        );
+        // Update button state
+        const victimElement = document.querySelector(`[data-victim-id="${victim._id}"]`);
+        if (victimElement) {
+          victimElement.textContent = 'Pending Approval';
+          victimElement.disabled = true;
+        }
+      } catch (error) {
+        console.error('Error sending rescue request:', error);
+        alert('Error sending rescue request. Please try again.');
+      }
+    }}
+    data-victim-id={victim._id}
+  >
+    Update to Rescued
+  </button>
+</div>
                     ))
                   ) : (
                     <p>No victims found nearby.</p>
@@ -439,7 +466,9 @@ const VolunteerDashboard = () => {
                 </div>
               )}
             </div>
-          ) : selectedOption === "logout" ? (
+          ) : selectedOption === "notifications" ? ( // Add this new condition
+            <NotificationList />
+          ): selectedOption === "logout" ? (
             handleLogout()
           ) : null}
         </div>

@@ -18,8 +18,16 @@ const VolSidebar = ({ selectedOption, setSelectedOption }) => {
         >
           Nearby Victims
         </li>
-        <li  className={selectedOption === "logout" ? "active" : ""}
-          onClick={() => setSelectedOption("logout")}>
+        <li
+          className={selectedOption === "notifications" ? "active" : ""}
+          onClick={() => setSelectedOption("notifications")}
+        >
+          Notifications
+        </li>
+        <li
+          className={selectedOption === "logout" ? "active" : ""}
+          onClick={() => setSelectedOption("logout")}
+        >
           Logout
         </li>
       </ul>
