@@ -12,8 +12,9 @@
 
 1. (in the WaveGuard) npm install
 2. (in the client) npm install
-3. (in the WaveGuard) myenv/Scripts/activate
-4. (in the WaveGuard) python app2.py
-5. (in the WaveGuard) npm run dev
+3. (in the client) npm install react-leaflet@4.x.x
+4. (in the WaveGuard) myenv/Scripts/activate
+5. (in the WaveGuard) python app2.py
+6. (in the WaveGuard) npm run dev
 
 ## make sure the mongodb compass is running and database is connected
