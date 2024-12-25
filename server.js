@@ -14,7 +14,7 @@ const puppeteer = require('puppeteer');
 const axios = require('axios');
 const cron = require('node-cron');
 const bodyParser = require('body-parser');
-
+const chatRoutes = require("./routes/ChatRoute");
 
 
 
@@ -44,6 +44,7 @@ app.use('/api/v1/victims',victimRoute);
 // app.use('/api/v1/locations', require('./routes/userRoute'));
 app.use("/api/v1", locationsRoute);
 app.use('/api/v1/notifications', notificationRoute);
+app.use("/api/v1", chatRoutes);
 
 
 // port
