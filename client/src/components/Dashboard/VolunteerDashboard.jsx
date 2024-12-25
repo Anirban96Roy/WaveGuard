@@ -487,7 +487,15 @@ const VolunteerDashboard = () => {
           selectedOption === "chat" ? (
             <Chat currentUserId={profile._id} otherUserId={selectedVictim?._id} otherUserName={selectedVictim?.name}  />
           ):
-           null}
+          selectedOption.type === "chat-detail" ? (
+            <Chat
+              currentUserId={profile._id}
+              otherUserId={selectedOption.participantId}
+              otherUserName={selectedOption.participantName}
+            />
+          ) : null
+          
+           }
         </div>
       </div>
     </Layout>
