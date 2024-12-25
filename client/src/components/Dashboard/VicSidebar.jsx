@@ -12,6 +12,15 @@ const VicSidebar = ({ selectedOption, setSelectedOption }) => {
         >
           Profile
         </li>
+
+        <li
+            className={selectedOption === "chat" ? "active" : ""}
+            onClick={() => setSelectedOption("chat")}
+        >
+            Chat
+        </li>
+
+
         <li
           className={selectedOption === "nearbyvolunteer" ? "active" : ""}
           onClick={() => setSelectedOption("nearbyvolunteer")}

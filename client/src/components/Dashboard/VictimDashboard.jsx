@@ -11,6 +11,7 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import { AiOutlineClose } from "react-icons/ai";
 import NotificationList from "./NotificationList"
+import Chat from "./Chat";
 const VictimDashboard = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
@@ -432,6 +433,18 @@ const VictimDashboard = () => {
                         >
                           {!profile.location ? "Set your location first" : "See Directions"}
                         </button>
+
+                    <button
+                      onClick={() => {
+                        setSelectedOption("chat");
+                        setSelectedVolunteer(volunteer);
+                      }}
+                    >
+                      Chat
+                    </button>
+                    
+
+
                       </div>
                     ))
                   ) : (
@@ -445,7 +458,10 @@ const VictimDashboard = () => {
           )
            : selectedOption === "logout" ? (
             handleLogout()
-          ) : null}
+          ) :
+          selectedOption === "chat" ? (
+            <Chat currentUserId={profile._id} otherUserId={selectedVolunteer?._id}  otherUserName={selectedVolunteer?.name}  />
+          ):  null}
         </div>
       </div>
     </Layout>
