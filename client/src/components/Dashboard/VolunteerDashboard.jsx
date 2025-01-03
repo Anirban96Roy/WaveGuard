@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import VolSidebar from "./VolSidebar";
 import "./VolunteerDashboard.css";
 import axios from "axios";
@@ -11,8 +11,9 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import 'leaflet-routing-machine';
 import { AiOutlineClose } from "react-icons/ai";
 import NotificationList from "./NotificationList"
-import Chat from "./Chat";
-
+import ChatInterface from "./ChatInterface";
+import { MapPin, MessageCircle, RefreshCw } from 'lucide-react';
+import NearbyShelters from './NearbyShelters';  // or adjust the path based on your file structure
 const VolunteerDashboard = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
@@ -26,7 +27,10 @@ const VolunteerDashboard = () => {
   const [routingControl, setRoutingControl] = useState(null);
   const [showMap, setShowMap] = useState(false);
   const [selectedVictim, setSelectedVictim] = useState(null);
-
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
+  const routingControlRef = useRef(null);
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const [editMode, setEditMode] = useState({
     name: false,
@@ -34,6 +38,70 @@ const VolunteerDashboard = () => {
     email: false,
     location: false,
   });
+
+// In VolunteerDashboard.js, modify the handlePictureUpload function:
+
+
+
+const handlePictureUpload = async (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const formData = new FormData();
+    formData.append("profilePicture", file);
+
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
+      // Remove the duplicate /api/v1 from the URL
+      const { data } = await axios.post(`/users/${user._id}/upload-picture`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
+      setProfilePicture(data.imagePath);
+    } catch (error) {
+      console.error("Error uploading profile picture:", error.response?.data || error);
+      alert("Failed to upload picture. Please try again.");
+    }
+  }
+};
+
+  useEffect(() => {
+    const fetchProfilePicture = async () => {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user) {
+        try {
+          const { data } = await axios.get(`/users/${user._id}/profile-picture`, {
+            headers: { Authorization: `Bearer ${user.token}` },
+          });
+          setProfilePicture(data.imagePath); // Assuming server sends the image path
+        } catch (error) {
+          console.error("Error fetching profile picture:", error.response?.data || error);
+        }
+      }
+    };
+  
+    fetchProfilePicture();
+  }, []);
+  
+
+  const cleanupMap = () => {
+    if (routingControlRef.current && mapInstanceRef.current) {
+      routingControlRef.current.remove();
+      routingControlRef.current = null;
+    }
+    if (mapInstanceRef.current) {
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
+    }
+  };
+
+   useEffect(() => {
+    return () => {
+      cleanupMap();
+    };
+  }, []);
+  
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -157,6 +225,56 @@ const VolunteerDashboard = () => {
     }
   };
 
+  // const showDirections = async (victimLocation) => {
+  //   try {
+  //     setSelectedVictim(victimLocation);
+  //     setShowMap(true);
+
+  //     // Get coordinates for both locations
+  //     const volunteerCoords = await getCoordinates(profile.location);
+  //     const victimCoords = await getCoordinates(victimLocation);
+
+  //     // Initialize map if not already initialized
+  //     let mapInstance = map;
+  //     if (!mapInstance) {
+  //       mapInstance = L.map('map').setView([volunteerCoords.lat, volunteerCoords.lon], 13);
+  //       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //         attribution: '© OpenStreetMap contributors'
+  //       }).addTo(mapInstance);
+  //       setMap(mapInstance);
+  //     }
+
+  //     // Remove existing routing control if any
+  //     if (routingControl) {
+  //       mapInstance.removeControl(routingControl);
+  //     }
+
+  //     // Add new routing control
+  //     const newRoutingControl = L.Routing.control({
+  //       waypoints: [
+  //         L.latLng(volunteerCoords.lat, volunteerCoords.lon),
+  //         L.latLng(victimCoords.lat, victimCoords.lon)
+  //       ],
+  //       routeWhileDragging: true,
+  //       lineOptions: {
+  //         styles: [{ color: '#3737d4', weight: 6 }]
+  //       },
+  //       // createMarker: function(i, waypoint, n) {
+  //       //   const marker = L.marker(waypoint.latLng);
+  //       //   marker.bindPopup(i === 0 ? "Your Location" : "Victim's Location");
+  //       //   return marker;
+  //       // }
+  //     }).addTo(mapInstance);
+
+  //     setRoutingControl(newRoutingControl);
+
+  //   } catch (error) {
+  //     console.error('Error showing directions:', error);
+  //     alert('Error getting directions. Please try again.');
+  //   }
+  // };
+
+  
   const showDirections = async (victimLocation) => {
     try {
       setSelectedVictim(victimLocation);
@@ -166,23 +284,18 @@ const VolunteerDashboard = () => {
       const volunteerCoords = await getCoordinates(profile.location);
       const victimCoords = await getCoordinates(victimLocation);
 
-      // Initialize map if not already initialized
-      let mapInstance = map;
-      if (!mapInstance) {
-        mapInstance = L.map('map').setView([volunteerCoords.lat, volunteerCoords.lon], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '© OpenStreetMap contributors'
-        }).addTo(mapInstance);
-        setMap(mapInstance);
-      }
+      // Cleanup existing map instance if any
+      cleanupMap();
 
-      // Remove existing routing control if any
-      if (routingControl) {
-        mapInstance.removeControl(routingControl);
-      }
+      // Create new map instance
+      mapInstanceRef.current = L.map(mapRef.current).setView([volunteerCoords.lat, volunteerCoords.lon], 13);
+      
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(mapInstanceRef.current);
 
-      // Add new routing control
-      const newRoutingControl = L.Routing.control({
+      // Create new routing control
+      routingControlRef.current = L.Routing.control({
         waypoints: [
           L.latLng(volunteerCoords.lat, volunteerCoords.lon),
           L.latLng(victimCoords.lat, victimCoords.lon)
@@ -190,15 +303,8 @@ const VolunteerDashboard = () => {
         routeWhileDragging: true,
         lineOptions: {
           styles: [{ color: '#3737d4', weight: 6 }]
-        },
-        // createMarker: function(i, waypoint, n) {
-        //   const marker = L.marker(waypoint.latLng);
-        //   marker.bindPopup(i === 0 ? "Your Location" : "Victim's Location");
-        //   return marker;
-        // }
-      }).addTo(mapInstance);
-
-      setRoutingControl(newRoutingControl);
+        }
+      }).addTo(mapInstanceRef.current);
 
     } catch (error) {
       console.error('Error showing directions:', error);
@@ -206,6 +312,7 @@ const VolunteerDashboard = () => {
     }
   };
 
+  
   useEffect(() => {
     return () => {
       if (map) {
@@ -276,7 +383,7 @@ const VolunteerDashboard = () => {
 
 
   return (
-    <Layout>
+    <Layout className="volunteer-dashboard-layout">
       <div className="voldashboard-container">
         <VolSidebar
           selectedOption={selectedOption}
@@ -289,7 +396,28 @@ const VolunteerDashboard = () => {
             <p>{error}</p>
           ) : selectedOption === "profile" ? (
             <div className="profile-section">
+              <div className="profile-picture-container">
+  <div className="profile-picture-frame">
+  <img
+  src={profilePicture ? `http://localhost:8081${profilePicture}` : "/dummy-avatar.png"}
+  alt="Profile"
+  className="profile-picture"
+/>
+    <label htmlFor="profile-picture-upload" className="profile-picture-upload">
+      <span className="upload-icon">+</span>
+    </label>
+    <input
+      type="file"
+      id="profile-picture-upload"
+      style={{ display: "none" }}
+      accept="image/*"
+      onChange={handlePictureUpload}
+    />
+  </div>
+</div>
+              <div className="profile-container">
               <h1>Profile</h1>
+
               <div className="profile-field">
                 <p>
                   <strong>Name:</strong>
@@ -372,7 +500,7 @@ const VolunteerDashboard = () => {
                 ) : (
                   <p>{profile.location}</p>
                 )}
-                <div className="location-buttons">
+              
                   <button
                     onClick={() =>
                       editMode.location
@@ -388,7 +516,8 @@ const VolunteerDashboard = () => {
                   >
                     {gettingLocation ? "Getting location..." : "Set Device Location"}
                   </button>
-                </div>
+                
+              </div>
               </div>
             </div>
           ) : selectedOption === "nearbyvictim" ? (
@@ -396,16 +525,13 @@ const VolunteerDashboard = () => {
               <h1>Nearby Victims</h1>
               {showMap && (
             <div className="floating-map-container">
-   <div id="map" style={{ height: '400px', width: '100%' }}></div>
+     <div id="map" ref={mapRef} style={{ height: '400px', width: '100%' }}></div>
      <AiOutlineClose 
       className="close-map-icon" 
       onClick={() => {
         setShowMap(false);
         setSelectedVictim(null);
-        if (routingControl && map) {
-          map.removeControl(routingControl);
-          setRoutingControl(null);
-        }
+        cleanupMap();
       }} 
     />
                 </div>
@@ -427,49 +553,54 @@ const VolunteerDashboard = () => {
   <p>
     <strong>Location:</strong> {victim.location}
   </p>
-  <button 
-    className="direction-btn"
-    onClick={() => showDirections(victim.location)}
-    disabled={!profile.location}
-  >
-    {!profile.location ? "Set your location first" : "See Directions"}
-  </button>
-  <button 
-    className="rescue-btn"
-    onClick={async () => {
-      try {
-        const user = JSON.parse(localStorage.getItem('user'));
-        await axios.post(
-          '/notifications/rescue-request',
-          { victimId: victim._id },
-          { headers: { Authorization: `Bearer ${user.token}` } }
-        );
-        // Update button state
-        const victimElement = document.querySelector(`[data-victim-id="${victim._id}"]`);
-        if (victimElement) {
-          victimElement.textContent = 'Pending Approval';
-          victimElement.disabled = true;
+  <div className="icon-container">
+  <div className="icon-wrapper">
+    <MapPin 
+      className={!profile.location ? 'disabled' : ''}
+      onClick={() => profile.location && showDirections(victim.location)}
+    />
+    <span className="icon-tooltip">
+      {!profile.location ? "Set your location first" : "See Directions"}
+    </span>
+  </div>
+  
+  <div className="icon-wrapper">
+    <RefreshCw 
+      onClick={async () => {
+        try {
+          const user = JSON.parse(localStorage.getItem('user'));
+          await axios.post(
+            '/notifications/rescue-request',
+            { victimId: victim._id },
+            { headers: { Authorization: `Bearer ${user.token}` } }
+          );
+          const victimElement = document.querySelector(`[data-victim-id="${victim._id}"]`);
+          if (victimElement) {
+            victimElement.classList.add('pending');
+          }
+        } catch (error) {
+          console.error('Error sending rescue request:', error);
+          alert('Error sending rescue request. Please try again.');
         }
-      } catch (error) {
-        console.error('Error sending rescue request:', error);
-        alert('Error sending rescue request. Please try again.');
-      }
-    }}
-    data-victim-id={victim._id}
-  >
-    Update to Rescued
-  </button>
+      }}
+      data-victim-id={victim._id}
+    />
+    <span className="icon-tooltip">Update to Rescued</span>
+  </div>
 
-  <button
-  onClick={() => {
-    setSelectedOption("chat");
-    setSelectedVictim(victim);
-  }}
->
-  Chat
-</button>
-
-
+  <div className="icon-wrapper">
+    <MessageCircle 
+      onClick={() => {
+        setSelectedOption({
+          type: "chat-detail",
+          participantId: victim._id,
+          participantName: victim.name
+        });
+      }}
+    />
+    <span className="icon-tooltip">Chat with Victim</span>
+  </div>
+</div>
 
 </div>
                     ))
@@ -484,18 +615,24 @@ const VolunteerDashboard = () => {
           ): selectedOption === "logout" ? (
             handleLogout()
           ) :
-          selectedOption === "chat" ? (
-            <Chat currentUserId={profile._id} otherUserId={selectedVictim?._id} otherUserName={selectedVictim?.name}  />
+          selectedOption === "all-chat" ? (
+            <ChatInterface currentUserId={profile._id} />
           ):
           selectedOption.type === "chat-detail" ? (
-            <Chat
-              currentUserId={profile._id}
-              otherUserId={selectedOption.participantId}
-              otherUserName={selectedOption.participantName}
+            <ChatInterface 
+              currentUserId={profile._id} 
+              initialSelectedUser={{
+                conversationWith: selectedOption.participantId,
+                userDetails: {
+                  name: selectedOption.participantName
+                }
+              }}
             />
           ) : null
-          
            }
+          {selectedOption === "nearbyshelters" ? (
+            <NearbyShelters userLocation={profile.location} />
+          ) : null}
         </div>
       </div>
     </Layout>

@@ -18,7 +18,7 @@ const Alert = () => {
   // Fetch data from the backend when the component mounts
   useEffect(() => {
     axios
-      .get('http://localhost:8001/api/v1/data')
+      .get('http://localhost:8081/api/v1/data')
       .then((response) => {
         console.log(response.data); // Log the fetched data
         setData(response.data);
@@ -124,6 +124,7 @@ const Alert = () => {
   return (
     <Layout>
     <div className="incident-chart">
+      <h2>Flood Severity Analysis</h2>
       {/* Show loading indicator or the chart */}
       {loading ? (
         <p>Loading data...</p>

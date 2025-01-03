@@ -15,7 +15,7 @@
     width: 80%; /* Width of the header */
     max-width: 800px; /* Optional: set a maximum width */
     right: 20px; /* Add a margin from the right edge */
-    background-color: #050229;
+    background-color: #0c0745;
     color: white;
     padding: 10px 20px;
     margin-top: 30px;
@@ -25,7 +25,7 @@
     /* Separate website name and nav links */
     align-items: center;
     box-sizing: border-box;
-    border-radius: 20px;
+    border-radius: 30px;
   }
   
   .search-box {
@@ -52,7 +52,7 @@
     margin-right: 0.1px;/* Space between input and button */
     padding: 5px; /* Padding for button */
     border: none; /* Remove default border */
-    background-color: #050229; /* Button background color */
+    background-color: #0c0745; /* Button background color */
     color: white; /* Button text color */
     border-radius: 7px; /* Rounded corners for button */
     cursor: pointer;
@@ -79,7 +79,10 @@
   }
   
   .nav a:hover {
-    text-decoration: underline;
+    /* text-decoration: underline; */
+    color: #98bce3;
+    transform: scale(1.1); /* Slightly enlarge the text */
+    transition: transform 0.3s ease, color 0.3s ease; 
   }
   
   /* Menu icon for mobile and tablet view */

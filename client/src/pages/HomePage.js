@@ -39,13 +39,13 @@ const HomePage = () => {
 
         <div className="card-holder">
           <div className="card">
-            <p>Card 1 content</p>
+            <p> 999 - Emergency Call Service </p>
           </div>
           <div className="card">
-            <p>Card 2 content</p>
+            <p> 16263 - Bangladesh Health Call Service </p>
           </div>
           <div className="card">
-            <p>Card 3 content</p>
+            <p>16226 - Bangladesh Red Crescent</p>
           </div>
         </div>
       </div>

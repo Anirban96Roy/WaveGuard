@@ -28,14 +28,14 @@ Find the PID being listened and kill it by running:
 ```
 taskkill /PID <PID> /F
 ```
-For example, for port 8001, run :
+For example, for port 8081, run :
 ```
-netstat -ano | findstr :8001
+netstat -ano | findstr :8081
 ```
 Check for output like this:
-  TCP    0.0.0.0:8001           0.0.0.0:0              LISTENING       3364
+  TCP    0.0.0.0:8081           0.0.0.0:0              LISTENING       3364
 
-Now to kill the process (PID) "3364" occupying port 8001, run:
+Now to kill the process (PID) "3364" occupying port 8081, run:
 ```
 taskkill /PID 3364 /F
 ```

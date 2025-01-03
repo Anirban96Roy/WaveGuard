@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation, useSearchParams } from "react-router-dom"; 
 import '../customCSS/login.css';
 import axios from "axios";
+import Layout from "../components/Layout/Layout";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -77,14 +78,10 @@ const Login = () => {
   }, [searchParams]);
 
   const toggleForm = () => {
-    setIsLogin(!isLogin);
-    setActive(!active);  
-    if (isLogin) {
-      navigate('/register');
-    } else {
-      navigate('/login');
-    }
+    setIsLogin((prev) => !prev);
+    setActive((prev) => !prev);
   };
+  
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -144,6 +141,7 @@ const Login = () => {
   }, [loc.pathname]);
 
   return (
+    <Layout>
     <div className={`container ${active ? 'active' : ''}`}>
       <div className="curved-shape"></div>
       <div className="curved-shape2"></div>
@@ -179,8 +177,22 @@ const Login = () => {
             </div>
             <div className="reg-link">
               <p>
-                Don't have an account? 
-                <a href="/register" onClick={(e) => { e.preventDefault(); toggleForm(); }} className="SignUpLink"> SignUp</a>
+                Don't have an account?
+                <br></br>
+                <p> </p> 
+                <a href='/register?role=volunteer'
+  onClick={(e) => { e.preventDefault(); toggleForm(); navigate('/register?role=volunteer'); }} 
+  className="SignUpLink"
+> 
+  SignUp as a Volunteer
+</a>
+<p>OR</p>
+<a href='/register?role=victim'
+  onClick={(e) => { e.preventDefault(); toggleForm(); navigate('/register?role=victim'); }} 
+  className="SignUpLink"
+> 
+  SignUp as a Victim
+</a>
               </p>
             </div>
           </form>
@@ -291,7 +303,7 @@ const Login = () => {
             <div className="reg-link">
               <p>
                 Already have an account? 
-                <a href="/login" onClick={(e) => { e.preventDefault(); toggleForm(); }} className="SignUpLink"> Login</a>
+                <a href="/login" onClick={(e) => { e.preventDefault(); toggleForm(); navigate('/login')}} className="SignUpLink"> Login</a>
               </p>
             </div>
           </form>
@@ -303,7 +315,7 @@ const Login = () => {
         <p>We are here to help!<br />Stay connected with us!!</p>
       </div>
     </div>
-  );
+    </Layout>);
 };
 
 export default Login;

@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:8001/api/v1/",
+  "proxy": "http://localhost:8081/api/v1/",
   "name": "expense_manager",
   "version": "1.0.0",
   "description": "",
@@ -15,6 +15,7 @@
   "author": "mimic2001",
   "license": "MIT",
   "dependencies": {
+    "@react-google-maps/api": "^2.20.5",
     "2captcha": "^3.0.5-2",
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",

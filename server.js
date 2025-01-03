@@ -15,6 +15,8 @@ const axios = require('axios');
 const cron = require('node-cron');
 const bodyParser = require('body-parser');
 const chatRoutes = require("./routes/ChatRoute");
+const uploadRoutes = require('./routes/uploadRoute');
+const shelterRoutes = require('./routes/shelterRoute');
 
 
 
@@ -32,6 +34,10 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/public/uploads', express.static('public/uploads'));
 
 app.use('/api/v1/users', require('./routes/userRoute'));
 app.use('/api/v1/users',require('./routes/donationRoute'));
@@ -45,10 +51,11 @@ app.use('/api/v1/victims',victimRoute);
 app.use("/api/v1", locationsRoute);
 app.use('/api/v1/notifications', notificationRoute);
 app.use("/api/v1", chatRoutes);
-
+app.use('/api/v1/users', uploadRoutes);
+app.use('/api/v1/shelters', shelterRoutes);
 
 // port
-const port = 8001 || process.env.port;
+const port = 8081 || process.env.port;
 
 // server start and Puppeteer scraping logic
 const startScraping = async () => {

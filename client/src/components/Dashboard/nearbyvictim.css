@@ -1,10 +1,15 @@
 /* Styling for the volunteers section */
 .victims-section {
-    padding: 20px;
-    background-color: #f4f7fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+  padding: 20px;
+  background-color: #f4f7fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 0px;
+  margin-left: 255px;
+  width: 1220px;
+  min-height: calc(100vh - 131px); /* Adjust based on header/footer height */
+  overflow-y: auto;
+  margin-bottom: 50px; /* Space before footer */
   }
   
   .victims-section h1 {
@@ -12,6 +17,7 @@
     font-size: 2rem;
     color: #333;
     margin-bottom: 60px;
+    padding-top: 60px;
   }
   
   /* Loader styles */
@@ -30,19 +36,23 @@
   
   /* Volunteer cards container */
   .victim-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 0;
-    margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  padding-bottom: 60px; /* Space after last row */
   }
   
   .victim-card {
     background-color: white;
     padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    box-shadow: 0 2px 8px var(--secondary-color);
     transition: all 0.3s ease-in-out;
+    border-color: rgba(6, 113, 155, 0.835);
+    border-width: 10px;
+    max-height: 300px;
   }
   
   .victim-card:hover {
@@ -79,6 +89,28 @@
     font-weight: bold;
   }
 
+  .direction-btn {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 90%;
+  }
+  
+  .direction-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .direction-btn:hover:not(:disabled) {
+    background-color: #2828a0;
+  }
+
   .directions-box {
     position: fixed;
     bottom: 20px;
@@ -94,6 +126,51 @@
     margin-top: 10px;
   }
   
+  .icon-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+  
+  .icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon-wrapper svg {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #4B5563;
+  }
+  
+  .icon-wrapper:hover svg {
+    transform: scale(1.1);
+    color: var(--secondary-color);
+  }
+  
+  .icon-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  .icon-wrapper:hover .icon-tooltip {
+    opacity: 1;
+  }
   /* Responsive styling for smaller screens */
   @media (max-width: 768px) {
     .victim-cards {

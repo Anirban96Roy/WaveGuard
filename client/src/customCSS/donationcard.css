@@ -1,105 +1,111 @@
-/* CSS for each DonationCard */
-.donor-card {
-    display: inline-flex;
-    flex-direction: row;
+/* Updated donationcard.css */
+.donor-card-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1180px;
+  margin: 1.3rem auto;
+  gap: 5.5rem;
+  padding: 1rem;
+}
+
+.donor-card-container:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.content-card {
+   /* Make both cards take equal space */
+  background: linear-gradient(45deg, #0c0745, #98bce3);
+  border-radius: 25px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Center content vertically */
+  align-items: center;     /* Center content horizontally */
+  min-height: 400px;      /* Ensure minimum height for content */
+  width: 600px;
+}
+
+.content-card:hover{
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.image-card {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 30px var(--secondary-color);
+  border-radius: 25px;
+  width:600px;
+}
+
+.image-card:hover{
+  transform: scale(1.05);
+  transition: transform 0.5s ease;
+  box-shadow: 0 0 0 0;
+}
+
+.donor-card-image {
+  width: 390px;
+  height: 390px;
+  border-radius: 8px;
+  object-fit:cover;
+}
+
+.content-card {
+  text-align: center;  /* Center all text content */
+}
+
+.donor-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 1rem;
+  background-color: var(--primary-color);
+  align-self: center;  /* Center the button */
+  transition: all 0.3s ease;
+}
+
+.donor-button:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.donor-button p {
+  color: white;
+  margin: 0;
+}
+
+.donor-card-description {
+  margin-bottom: 1rem;
+  font-size: 18px;
+  color: white;
+  font-weight: 500;
+}
+
+.donor-card-stats {
+  font-size: 16px;
+  margin: 0.5rem 0;
+  font-weight: 1000;
+  color: #0c0745;
+}
+
+@media (max-width: 768px) {
+  .donor-card-container {
+    flex-direction: column !important;
+    margin: 1rem;
+  }
+
+  .image-card, .content-card {
     width: 100%;
-    max-width: 1330px; /* Set a max width for larger screens */
-    margin-bottom: 1rem;
+    min-height: auto;     /* Reset min-height for mobile */
     padding: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: hsl(213, 89%, 76%);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
-    border-radius: 10px;
-    justify-content: space-between; /* Ensure content is spread across the card */
   }
-  
-  /* Alternate card layout */
-  .donor-card:nth-child(even) {
-    flex-direction: row-reverse;
+
+  .donor-card-image {
+    margin: 1rem 0;
   }
-  
-  /* Image styling */
-  .donor-card img {
-    width: 190px; /* Fixed width for the image */
-    height: 190px;
-    border-radius: 8px;
-  }
-  
-  /* Content area styling */
-  .donor-card:nth-child(odd) .donor-card-content {
-    align-items: flex-end; /* Align text to the right for odd cards */
-    text-align: right; /* Ensure text is right-aligned */
-    margin-left: 190px;
-    padding-left: 40px;
-    font-size: 18px;
-  }
-  
-  .donor-card:nth-child(even) .donor-card-content {
-    align-items: flex-start; /* Align text to the left for even cards */
-    text-align: left; /* Ensure text is left-aligned */
-    margin-right: 190px;
-    padding-right: 40px;
-    font-size: 18px;
-  }
-  
-  .donor-card-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  /* Button alignment */
-  .donor-card:nth-child(odd) .donor-button {
-    align-self: flex-end; /* Right align for odd cards */
-    background-color: #050229;
-  }
-  
-  .donor-card:nth-child(odd) .donor-button p{
-    /* Right align for odd cards */
-    color: white;
-  }
-  
-  .donor-card:nth-child(even) .donor-button {
-    align-self: flex-start; /* Left align for even cards */
-    background-color: #050229;
-  }
-  
-  .donor-card:nth-child(even) .donor-button p{
-    /* Right align for odd cards */
-    color: white;
-  }
-  
-  
-  .donor-card:hover {
-    background-color: rgb(62, 156, 244);
-    box-shadow:rgb(from color r g b);
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .donor-card {
-      flex-direction: column; /* Stack content vertically on smaller screens */
-      text-align: center;
-      margin-left: 1rem;
-      margin-right: 1rem;
-    }
-  
-    .donor-card img {
-      width: 100%; /* Make image responsive */
-      max-width: 200px; /* Ensure image doesn't grow too large */
-      margin-bottom: 1rem; /* Space between image and text */
-    }
-  
-    .donor-card-content {
-      align-items: center; /* Center content on small screens */
-      text-align: center;
-    }
-  
-    /* Reset button alignment on small screens */
-    .donor-button {
-      align-self: center; /* Center button alignment for small screens */
-    }
-  }
-  
+}

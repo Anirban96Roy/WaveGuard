@@ -79,6 +79,27 @@
     font-weight: bold;
   }
 
+
+  .voldirection-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #3737d4;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .voldirection-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .voldirection-btn:hover:not(:disabled) {
+    background-color: #2828a0;
+  }
+
   .directions-box {
     position: fixed;
     bottom: 20px;

@@ -26,19 +26,14 @@ const PostHerePage = () => {
         <Layout>
             <div className="post-here-page">
                 
-                <div className="header">
-                    <h1>Share your story with the world, one post at a time!</h1>
-                </div>
-
-               
+                
+                    <h1>Share your story with the world, one post at a time!</h1>       
                 <button
                     onClick={() => setIsModalOpen(true)}
                     className="post-here-btn"
                 >
                     Add Post
-                </button>
-
-            
+                </button>    
                 <div
                     className={`modal ${isModalOpen ? '' : 'hidden'}`}
                     aria-hidden={!isModalOpen}
@@ -49,9 +44,7 @@ const PostHerePage = () => {
                             closeModal={() => setIsModalOpen(false)}
                         />
                     )}
-                </div>
-
-               
+                </div> 
                 <PostList posts={posts} />
             </div>
         </Layout>

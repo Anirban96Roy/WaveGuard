@@ -24,13 +24,14 @@
   color: white;
   font-size: 70px;
   margin-top: 80px;
+  font-weight: 1000;
   animation: fadeIn 1s ease-in-out; /* Header fades in first */
 }
 
 .homepage p {
   color: white;
   margin: 20px auto;
-  font-weight: 300;
+  font-weight: 1000;
   font-size: 25px;
   animation: fadeIn 1.5s ease-in-out; /* Paragraph fades in next */
 }

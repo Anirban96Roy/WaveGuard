@@ -1,57 +1,78 @@
 .voldashboard-container {
     display: flex;
-    height: 100vh;
+    min-height: calc(100vh - 150px);
     width: 1530px;
-    background-color: #f9f9f9;
+    background: var(--background-color);
+    overflow-y: auto;/* Added for scrolling */
   }
+
   
-  .volsidebar {
+  /* .volsidebar {
     width: 250px;
     background-color: #333;
     color: white;
     padding: 20px;
-  }
+    height: calc(100vh - 85px);
+    position: fixed;
+  } */
   
-  .volsidebar h2 {
+  /* .volsidebar h2 {
     margin-bottom: 20px;
     color: #f0f0f0;
-  }
+  } */
   
-  .volsidebar ul {
+  /* .volsidebar ul {
     list-style: none;
     padding: 0;
-  }
+  } */
   
-  .volsidebar ul li {
+  /* .volsidebar ul li {
     margin: 15px 0;
     padding: 10px;
     cursor: pointer;
     color: #ddd;
-  }
+  } */
   
-  .volsidebar ul li.active, .volsidebar ul li:hover {
+  /* .volsidebar ul li.active, .volsidebar ul li:hover {
     background-color: #444;
     color: white;
-  }
+  } */
   
   .voldashboard-content {
-    flex-grow: 1;
     padding: 20px;
+    flex: 1;
+    overflow-y: auto; /* Added for scrolling */
+    padding-bottom: 100px; /* Added space for footer */
+  
   }
 
   .profile-section {
-    padding: 30px;
+    padding: 40px;
     width: 100%;
+    display: flex; /* Added to create a flex container */
+    gap: 40px; 
   }
   
   .profile-section h1 {
     margin-bottom: 15px;
   }
+
+  .profile-container{
+    background: white;
+    margin-top: 110px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    flex: 1; /* Takes up remaining space */
+    max-width: 650px;
+    /* margin: 20px 0;  */
+    z-index: 100;
+  }
   
   .profile-field {
-    display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    position: relative;
   }
   
   .profile-field p {
@@ -68,28 +89,17 @@
   
   .profile-field button {
     padding: 5px 10px;
-    background-color: #050229;
+    background-color: #0c0745;
     color: white;
     border: none;
     border-radius: 20px;
     cursor: pointer;
+    width: 150px;
   }
   
   .profile-field button:hover {
-    background-color: #050229;
+    background-color: #0c0745;
   }
-
-
-  /* Add these styles to your existing CSS file */
-
-/* .map-container {
-  position: relative;
-  margin: 20px 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 900px;
-} */
 
 .floating-map-container {
   position: fixed;
@@ -109,21 +119,6 @@
   height: calc(100% - 40px);
 }
 
-
-/* .close-map-btn {
-  position: absolute;
-  width: 60px;
-  top: 10px;
-  right: 10px;
-  z-index: 1000;
-  padding: 8px 16px;
-  background-color: #b52727;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-} */
-
 .close-map-icon {
   position: absolute;
   top: 10px;
@@ -141,23 +136,52 @@
   color: #d11a2a;
 }
 
-.direction-btn {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #3737d4;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+
+
+.profile-picture-container {
+  flex-shrink: 0; /* Prevents the container from shrinking */
+  margin-top: 150px; 
+  margin-left: 300px;
+  margin-right: 60px;
+}
+
+.profile-picture-frame {
+  position: relative; /* Added for upload button positioning */
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #98bce3;
+}
+
+.profile-picture {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.direction-btn:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+.profile-picture-upload {
+  position: absolute;
+  bottom: 35px;
+  right: 35px;
+  background-color: #98bce3;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 10;
+  border: 2px solid white;
 }
 
-.direction-btn:hover:not(:disabled) {
-  background-color: #2828a0;
+.upload-icon {
+  font-weight: bold;
+  line-height: 1;     /* Added to center the plus sign vertically */
+  margin-bottom: 2px; /* Fine-tune the plus sign position */
 }
+
   

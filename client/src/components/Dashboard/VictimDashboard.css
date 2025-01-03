@@ -68,7 +68,7 @@
   
   .profile-field button {
     padding: 5px 10px;
-    background-color: #050229;
+    background-color: #0c0745;
     color: white;
     border: none;
     border-radius: 20px;
@@ -76,7 +76,7 @@
   }
   
   .profile-field button:hover {
-    background-color: #050229;
+    background-color: #0c0745;
   }
 
 
@@ -141,23 +141,5 @@
   color: #d11a2a;
 }
 
-.direction-btn {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background-color: #3737d4;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
 
-.direction-btn:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-}
-
-.direction-btn:hover:not(:disabled) {
-  background-color: #2828a0;
-}
   

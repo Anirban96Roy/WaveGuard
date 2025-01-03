@@ -41,11 +41,17 @@ const VolSidebar = ({ selectedOption, setSelectedOption, currentUserId }) => {
           Nearby Victims
         </li>
         <li
-          className={selectedOption === "all-chat" ? "active" : ""}
-          onClick={() => setSelectedOption("all-chat")}
+          className={selectedOption === "nearbyshelters" ? "active" : ""}
+          onClick={() => setSelectedOption("nearbyshelters")}
         >
-          All Chat
+          <span>Nearby Shelters</span>
         </li>
+        <li
+  className={selectedOption === "all-chat" ? "active" : ""}
+  onClick={() => setSelectedOption("all-chat")}
+>
+  All Chat
+</li>
         <li
           className={selectedOption === "logout" ? "active" : ""}
           onClick={() => setSelectedOption("logout")}
@@ -56,7 +62,7 @@ const VolSidebar = ({ selectedOption, setSelectedOption, currentUserId }) => {
 
       {selectedOption === "all-chat" && (
         <div className="chat-list">
-          <h3>All Chats</h3>
+          <h3></h3>
           <ul>
             {allChats.length > 0 ? (
               allChats.map((chat) => (
@@ -75,7 +81,7 @@ const VolSidebar = ({ selectedOption, setSelectedOption, currentUserId }) => {
                 </li>
               ))
             ) : (
-              <p>No chats found.</p>
+              <p></p>
             )}
           </ul>
         </div>

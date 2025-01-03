@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema(
     role: { type: String, 
       enum: ["volunteer", "victim"], 
       required: true }, // Enforce allowed roles
+    profilePicture: { type: String, default: '/uploads/profile-pictures/default.png' },
   },
   { timestamps: true }
 );

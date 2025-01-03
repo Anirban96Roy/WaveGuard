@@ -42,11 +42,11 @@ const PostTemplate = ({ refreshPosts, closeModal }) => {
                     onChange={(e) => setContent(e.target.value)}
                     required
                 ></textarea>
-                {/* <input
+                <input
                     type="file"
                     accept="image/*,video/*"
                     onChange={(e) => setMedia(e.target.files[0])}
-                /> */}
+                />
                 <button type="submit">Post</button>
                 <button type="button" onClick={closeModal}>
                     Cancel
