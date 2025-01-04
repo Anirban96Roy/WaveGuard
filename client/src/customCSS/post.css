@@ -52,7 +52,7 @@
 .post-card {
     display: flex;
     justify-content: space-between;
-    
+    background-color: #f4f7fa;
     gap: 20px;
     border: rgba(6, 113, 155, 0.835);
     border-radius: 25px;
@@ -93,11 +93,6 @@
     margin-right: 20px;
 }
 
-.post-card.right-content .post-content small{
-    color: white;
-    padding: 5px;
-}
-
 .post-card.right-content .post-image {
     order: 1;
     flex: 1;
@@ -110,17 +105,17 @@
 }
 
 .post-card .post-content h3{
-    color: white;
+    color: var(--text-color);
     padding: 5px;
 }
 
 .post-card .post-content p{
-    color: white;
+    color: var(--text-color);
     padding: 5px;
 }
 
 .post-card .post-content small{
-    color: white;
+    color: var(--text-color);
     padding: 5px;
 }
 

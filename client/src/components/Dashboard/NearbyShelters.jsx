@@ -87,7 +87,7 @@ const NearbyShelters = ({ userLocation }) => {
       <h2 className="text-xl font-bold mb-4">Nearby Shelters</h2>
       <div id="map" style={{ height: '560px', width: '65%', margin: 'auto', alignContent: 'center'}}></div>
       <script async defer 
-        src={`https://maps.googleapis.com/maps/api/js?key=MY_API`}>
+        src={`https://maps.googleapis.com/maps/api/js?key=My_API`}>
       </script>
     </div>
   );
