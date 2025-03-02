@@ -1,4 +1,4 @@
-# System-Project Lore
+# Flood monitoring and rescue system (WaveGuard)
 
 ## git clone https://github.com/AritraLikhan/WaveGuard.git
 
